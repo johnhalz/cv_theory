@@ -8,7 +8,7 @@ style="display: block;
         margin-left: auto;
         margin-right: auto;
         width: 80%;"
-src="../img/p13.png">
+src="../img/p13.svg">
 </img>
 
 ## Why study computer vision?

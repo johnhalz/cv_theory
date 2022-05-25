@@ -8,7 +8,7 @@ style="display: block;
         margin-left: auto;
         margin-right: auto;
         width: 90%;"
-src="../img/p48.png">
+src="../../img/p48.png">
 </img>
 
 ## Why VO?
@@ -41,7 +41,7 @@ style="display: block;
         margin-left: auto;
         margin-right: auto;
         width: 50%;"
-src="../img/p54.png">
+src="../../img/p54.png">
 </img>
 
 ### VO Vs. Structure from Motion (SFM)
@@ -63,8 +63,28 @@ style="display: block;
         margin-left: auto;
         margin-right: auto;
         width: 50%;"
-src="../img/p57.png">
+src="../../img/p57.png">
 </img>
 
 ## VO Flow Chart
-VO computes the camera path incrementally (pose after pose)
+VO computes the camera path incrementally (pose after pose).
+
+``` mermaid
+stateDiagram-v2
+    s1 : Image Sequence
+    s2 : Feature Detection
+    s3 : Feature Matching (Tracking)
+    s4 : Motion Estimation
+    s5 : Local Optimization
+
+    s1 --> s2
+    s2 --> s3
+    s3 --> s4
+    s4 --> s5
+```
+
+The steps involving feature detection to motion estimation are known as the "front-end". They output the relative post between the last two frames.
+
+The last step (local optimization) adjusts the relative poses amongst multiple recent frames.
+
+VO studies the incremental camera path computation (frame after frame).
