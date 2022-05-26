@@ -3,13 +3,8 @@
 ## What is Visual Odometry (VO)?
 VO is the process of incrementally estimating the pose of the vehicle by examining the changes that motion induces on the images of its onboard cameras.
 
-<img 
-style="display: block; 
-        margin-left: auto;
-        margin-right: auto;
-        width: 90%;"
-src="../../img/p48.png">
-</img>
+![p48](../../img/p48w.svg#only-light)
+![p48](../../img/p48b.svg#only-dark)
 
 ## Why VO?
 - VO is crucial for flying, walking, and underwater robots
@@ -36,13 +31,8 @@ src="../../img/p48.png">
 - 2021. VO is used on the Mars helicopter Ingenuity
 
 ## VO Vs. VSLAM Vs. SFM
-<img 
-style="display: block; 
-        margin-left: auto;
-        margin-right: auto;
-        width: 50%;"
-src="../../img/p54.png">
-</img>
+![p54](../../img/p54w.svg#only-light)
+![p54](../../img/p54b.svg#only-dark)
 
 ### VO Vs. Structure from Motion (SFM)
 SFM is more general than VO and tackles the problem of 3D reconstruction and 6DOF pose estimation from unordered image sets.
@@ -58,13 +48,8 @@ VO Vs. Visual SLAM (VSLAM)
     - SLAM = visual odometry + **loop detection & closure**
     - Guarantees global consistency (the estimated trajectory is globally correct, i.e. from the start to the end)
 
-<img 
-style="display: block; 
-        margin-left: auto;
-        margin-right: auto;
-        width: 50%;"
-src="../../img/p57.png">
-</img>
+![p57](../../img/p57w.svg#only-light)
+![p57](../../img/p57b.svg#only-dark)
 
 ## VO Flow Chart
 VO computes the camera path incrementally (pose after pose).

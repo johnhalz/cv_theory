@@ -1,17 +1,19 @@
 # Image Formation
 
-## Historical Context
-- **Pinhole Model**: Mozi (470-390 BCE), Aristotle (384-322 BCE)
-- Principles of optics (including lenses): Alhacen (965-1039)
-- Camera obscura: Leonardo da Vinci (1452-1519), Johann Zahn (1631-1707)
-- **First Photo (Heliography)**: Joseph Nicephore Niepce (1822)
-- **Daguerréotypes** (1839)
-- Photographic film (Eastman, 1888, founder of Kodak)
-- Cinema (Lumière Brothers, 1895)
-- Color Photography (Lumière Brothers, 1908)
-- Television (Baird, Farnsworth, Zworykin, 1920s)
-- **First consumer camera with CCD**: Sony Mavica (1981)
-- **First fully digital camera**: Kodak DCS100 (1990)
+??? tldr
+    ## Historical Context
+
+    - **Pinhole Model**: Mozi (470-390 BCE), Aristotle (384-322 BCE)
+    - Principles of optics (including lenses): Alhacen (965-1039)
+    - Camera obscura: Leonardo da Vinci (1452-1519), Johann Zahn (1631-1707)
+    - **First Photo (Heliography)**: Joseph Nicephore Niepce (1822)
+    - **Daguerréotypes** (1839)
+    - Photographic film (Eastman, 1888, founder of Kodak)
+    - Cinema (Lumière Brothers, 1895)
+    - Color Photography (Lumière Brothers, 1908)
+    - Television (Baird, Farnsworth, Zworykin, 1920s)
+    - **First consumer camera with CCD**: Sony Mavica (1981)
+    - **First fully digital camera**: Kodak DCS100 (1990)
 
 ## Image Formation - How are objects in the world captured in an image?
 Would such a setup work?

@@ -19,7 +19,7 @@ src="../img/p13.svg">
 
 ## Vision in Humans
 - Vision is our most powerful sense. Half of primate cerebral cortex is devoted to visual processing.
-- The retina is ~1,000 mm^2. Contains 130 million photoreceptors (120 mil. rods for low light vision and 10 mil. cones for color sampling) covering a visual field of 220x135 degrees.
+- The retina is ~1,000 mm^2^. Contains 130 million photoreceptors (120 mil. rods for low light vision and 10 mil. cones for color sampling) covering a visual field of 220x135 degrees.
 - Provides enormous amount of information: data-rate of ~3 GBytes/s.
 - To match the eye resolution, we would need a 500 Megapixel camera. But in practice the acuity of an eye is 8 Megapixels within a 18-degree field of view (5.5 mm diameter) around a region called fovea.
 
@@ -28,13 +28,8 @@ src="../img/p13.svg">
 - The fovea is 0.35 mm in diameter, covers a visual field of 1-2 degrees, has high density of cone cells.
 - Within the rest of the peripheral visual field, the image we perceive becomes more blurry (rod cells)
 
-<img 
-style="display: block; 
-        margin-left: auto;
-        margin-right: auto;
-        width: 80%;"
-src="../img/p19.png">
-</img>
+![p19](../../img/p19w.svg#only-light)
+![p19](../../img/p19b.svg#only-dark)
 
 ## Origins of Computer Vision
 - 1963 - L. G. Roberts publishes his PhD thesis on Machine Perception of Three Dimensional Solids, thesis, MIT Department of Electrical Engineering
@@ -45,13 +40,8 @@ src="../img/p19.png">
 ## Computer Vision Vs. Computer Graphics
 The two problems are inverted: analysis vs. synthesis
 
-<img 
-style="display: block; 
-        margin-left: auto;
-        margin-right: auto;
-        width: 40%;"
-src="../img/p24.png">
-</img>
+![p24](../../img/p24w.svg#only-light)
+![p24](../../img/p24b.svg#only-dark)
 
 ## Reference Textbooks
 - Computer Vision: Algorithms and Applications, by Richard Szeliski, 2009. PDF freely downloadable from the author webpage: <http://szeliski.org/Book/>
