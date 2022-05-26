@@ -30,13 +30,8 @@ Given a set of $n$ point correspondences between two images, $p_1^i = (u_1^i, v_
     \end{cases}
     $$
 
-    <img 
-    style="display: block; 
-           margin-left: auto;
-           margin-right: auto;
-           width: 50%;"
-    src="../../img/p510.png">
-    </img>
+    ![p510](../img/p510w.svg#only-light)
+    ![p510](../img/p510b.svg#only-dark)
 
 ## Two Problem Variants
 Two variants of this problem exist:

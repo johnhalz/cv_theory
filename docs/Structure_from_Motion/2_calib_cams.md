@@ -43,13 +43,8 @@ $$
 ## Scale Ambiguity
 If we rescale the entire scene and camera views by a constant factor (i.e. similarity transformation), the projections (in pixels) of the scene points in both images remain exactly the same.
 
-<img 
-style="display: block; 
-        margin-left: auto;
-        margin-right: auto;
-        width: 50%;"
-src="../../img/p513.png">
-</img>
+![p513](../img/p513w.svg#only-light)
+![p513](../img/p513b.svg#only-dark)
 
 In Structure from Motion, it is therefore not possible to recover the absolute scale of the scene!
 - We can do this with stereo vision, because we have prior knowledge of the transformation between cameras (the baseline between the values gives a parameter in physical units).
@@ -83,23 +78,13 @@ Can we solve the estimation of relative motion $(R, T)$ independently of the est
 - The camera centers $C_1$, $C_2$ and one image point $p_1$ (or $p_2$) determine the so called **epipolar plane**.
 - The intersections of the epipolar plane with the two image planes are called **epipolar lines**.
 - **Corresponding points must therefore lie along the epipolar lines**: This constraint is called the epipolar constraint
-- And alternative way to formulate the epipolar constraint is to notice that **two correponding image vectors plus the baseline must be coplanar**.
+- And alternative way to formulate the epipolar constraint is to notice that **two corresponding image vectors plus the baseline must be coplanar**.
 
-<img 
-style="display: block; 
-        margin-left: auto;
-        margin-right: auto;
-        width: 50%;"
-src="../../img/p517.png">
-</img>
+![p517](../img/p517w.svg#only-light)
+![p517](../img/p517b.svg#only-dark)
 
-<img 
-style="display: block; 
-        margin-left: auto;
-        margin-right: auto;
-        width: 50%;"
-src="../../img/p518.png">
-</img>
+![p518](../img/p518w.svg#only-light)
+![p518](../img/p518b.svg#only-dark)
 
 We know that $\bar{p}_1$, $\bar{p}_2$ and $T$ are **coplanar** :
 
@@ -111,7 +96,7 @@ $$
 $$
 
 !!! tip
-    $\bar{p}'_1$ is the vector $\bar{p}_1$ in the scond camera's frame.
+    $\bar{p}'_1$ is the vector $\bar{p}_1$ in the second camera's frame.
 
 The resulting equation from the deduction above is the **epipolar constraint**:
 
@@ -191,7 +176,7 @@ The matrix $Q$ is known, whereas the matrix $E$ is unknown.
 - The solution of the 8-point algorithm is **degenerate when the 3D points are coplanar**.
 - Conversely, the 5-point algorithm works also for coplanar points.
 
-## Extract $R$ and $T$ from $E$
+## Extract Rotation and Translation
 Singular value decomposition yields the following: $E = U \Sigma V^T$.
 
 Enforcing a rank-2 constraint: We set the smallest singular value of $\Sigma$ to 0:
@@ -237,12 +222,7 @@ $$
 \end{align}
 $$
 
-Such an answer gives four possible solutions. However, thereis only one solution where the points are in front of both cameras:
+Such an answer gives four possible solutions. However, there is only one solution where the points are in front of both cameras:
 
-<img 
-style="display: block; 
-        margin-left: auto;
-        margin-right: auto;
-        width: 70%;"
-src="../../img/p528.png">
-</img>
+![p528](../img/p528w.svg#only-light)
+![p528](../img/p528b.svg#only-dark)

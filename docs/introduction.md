@@ -3,13 +3,8 @@
 ## What is computer vision?
 Computer vision is the automatic extraction of "meaningful" information from images and videos.
 
-<img 
-style="display: block; 
-        margin-left: auto;
-        margin-right: auto;
-        width: 80%;"
-src="../img/p13.svg">
-</img>
+![p13](../img/p13w.svg#only-light)
+![p13](../img/p13b.svg#only-dark)
 
 ## Why study computer vision?
 - Relieve humans of boring, easy tasks
@@ -28,8 +23,8 @@ src="../img/p13.svg">
 - The fovea is 0.35 mm in diameter, covers a visual field of 1-2 degrees, has high density of cone cells.
 - Within the rest of the peripheral visual field, the image we perceive becomes more blurry (rod cells)
 
-![p19](../../img/p19w.svg#only-light)
-![p19](../../img/p19b.svg#only-dark)
+![p19](../img/p19w.svg#only-light)
+![p19](../img/p19b.svg#only-dark)
 
 ## Origins of Computer Vision
 - 1963 - L. G. Roberts publishes his PhD thesis on Machine Perception of Three Dimensional Solids, thesis, MIT Department of Electrical Engineering
@@ -40,8 +35,8 @@ src="../img/p13.svg">
 ## Computer Vision Vs. Computer Graphics
 The two problems are inverted: analysis vs. synthesis
 
-![p24](../../img/p24w.svg#only-light)
-![p24](../../img/p24b.svg#only-dark)
+![p24](../img/p24w.svg#only-light)
+![p24](../img/p24b.svg#only-dark)
 
 ## Reference Textbooks
 - Computer Vision: Algorithms and Applications, by Richard Szeliski, 2009. PDF freely downloadable from the author webpage: <http://szeliski.org/Book/>
