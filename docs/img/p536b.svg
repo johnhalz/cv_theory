@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg width="100%" height="100%" viewBox="0 0 900 165" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:1.5;">
+    <g transform="matrix(1,0,0,1,3.70634,-206.061)">
+        <g transform="matrix(1.00364,0,0,1.00216,123.449,54.8343)">
+            <rect x="50.481" y="197.239" width="161.412" height="94.795" style="fill:none;stroke:white;stroke-width:1px;"/>
+        </g>
+        <g transform="matrix(1,0,0,1,-251.552,6.19839)">
+            <text x="398.906px" y="237.504px" style="font-family:'SFMono-Regular', 'SF Mono', monospace;font-size:17.316px;fill:white;">(0,0)</text>
+        </g>
+        <g transform="matrix(1,0,0,1,-246.2,128.447)">
+            <text x="382.85px" y="237.504px" style="font-family:'SFMono-Regular', 'SF Mono', monospace;font-size:17.316px;fill:white;">(0,500)</text>
+        </g>
+        <g transform="matrix(1,0,0,1,-84.1997,6.19839)">
+            <text x="382.85px" y="237.504px" style="font-family:'SFMono-Regular', 'SF Mono', monospace;font-size:17.316px;fill:white;">(700,0)</text>
+        </g>
+        <g transform="matrix(1,0,0,1,-78.8477,128.447)">
+            <text x="366.795px" y="237.504px" style="font-family:'SFMono-Regular', 'SF Mono', monospace;font-size:17.316px;fill:white;">(700,500)</text>
+        </g>
+        <g transform="matrix(1,0,0,1,-302.21,-47.5)">
+            <g transform="matrix(1,-0,-0,1,298.504,253.561)">
+                <path d="M180.821,62.805L177.821,68.805L174.821,62.805C176.321,64.305 179.321,64.305 180.821,62.805Z" style="fill:rgb(255,0,0);"/>
+                <path d="M177.821,46.439L177.821,64.005" style="fill:none;stroke:rgb(255,0,0);stroke-width:1px;"/>
+            </g>
+        </g>
+        <g transform="matrix(6.12323e-17,-1,1,6.12323e-17,-125.885,728.825)">
+            <g transform="matrix(6.12323e-17,1,-1,6.12323e-17,522.764,122.179)">
+                <path d="M194.187,43.439L200.187,46.439L194.187,49.439C195.687,47.939 195.687,44.939 194.187,43.439Z" style="fill:rgb(255,0,0);"/>
+                <path d="M177.821,46.439L195.387,46.439" style="fill:none;stroke:rgb(255,0,0);stroke-width:1px;"/>
+            </g>
+        </g>
+    </g>
+    <g transform="matrix(1,0,0,1,3.70634,-206.061)">
+        <g transform="matrix(0.588557,0,0,1.00216,599.114,54.8343)">
+            <rect x="50.481" y="197.239" width="161.412" height="94.795" style="fill:none;stroke:white;stroke-width:1.22px;"/>
+        </g>
+        <g transform="matrix(1,0,0,1,203.159,6.65581)">
+            <text x="388.202px" y="237.504px" style="font-family:'SFMono-Regular', 'SF Mono', monospace;font-size:17.316px;fill:white;">(-1,-1)</text>
+        </g>
+        <g transform="matrix(1,0,0,1,208.511,128.904)">
+            <text x="388.202px" y="237.504px" style="font-family:'SFMono-Regular', 'SF Mono', monospace;font-size:17.316px;fill:white;">(-1,1)</text>
+        </g>
+        <g transform="matrix(1,0,0,1,256.011,56.188)">
+            <text x="393.554px" y="237.504px" style="font-family:'SFMono-Regular', 'SF Mono', monospace;font-size:17.316px;fill:white;">(0,0)</text>
+        </g>
+        <g transform="matrix(1,0,0,1,303.511,6.19839)">
+            <text x="388.202px" y="237.504px" style="font-family:'SFMono-Regular', 'SF Mono', monospace;font-size:17.316px;fill:white;">(1,-1)</text>
+        </g>
+        <g transform="matrix(1,0,0,1,308.862,128.447)">
+            <text x="388.202px" y="237.504px" style="font-family:'SFMono-Regular', 'SF Mono', monospace;font-size:17.316px;fill:white;">(1,1)</text>
+        </g>
+        <g transform="matrix(1,0,0,1,200,0)">
+            <g transform="matrix(1,-0,-0,1,-203.706,206.061)">
+                <path d="M683.031,110.305L680.031,116.305L677.031,110.305C678.531,111.805 681.531,111.805 683.031,110.305Z" style="fill:rgb(255,0,0);"/>
+                <path d="M680.031,93.939L680.031,111.505" style="fill:none;stroke:rgb(255,0,0);stroke-width:1px;"/>
+            </g>
+        </g>
+        <g transform="matrix(6.12323e-17,-1,1,6.12323e-17,376.325,776.325)">
+            <g transform="matrix(6.12323e-17,1,-1,6.12323e-17,570.264,-380.031)">
+                <path d="M696.397,90.939L702.397,93.939L696.397,96.939C697.897,95.439 697.897,92.439 696.397,90.939Z" style="fill:rgb(255,0,0);"/>
+                <path d="M680.031,93.939L697.597,93.939" style="fill:none;stroke:rgb(255,0,0);stroke-width:1px;"/>
+            </g>
+        </g>
+    </g>
+    <g transform="matrix(1,0,0,1,30.0225,-170.456)">
+        <g transform="matrix(0.72408,0,0,0.72408,114.506,47.5413)">
+            <g>
+                <g transform="matrix(1,0,0,1,16.2517,-31.6079)">
+                    <text x="404.258px" y="237.504px" style="font-family:'SFMono-Regular', 'SF Mono', monospace;font-size:17.316px;fill:white;">700</text>
+                </g>
+                <g transform="matrix(1,0,0,1,16.3067,-51.1768)">
+                    <text x="414.962px" y="237.504px" style="font-family:'SFMono-Regular', 'SF Mono', monospace;font-size:17.316px;fill:white;">2</text>
+                </g>
+                <g transform="matrix(0.749838,0,0,1,109.227,0.322782)">
+                    <path d="M416.927,189.628L456.324,189.628" style="fill:none;stroke:white;stroke-width:1.13px;"/>
+                </g>
+            </g>
+            <g transform="matrix(1,0,0,1,16.3024,-4.86364)">
+                <text x="414.962px" y="237.504px" style="font-family:'SFMono-Regular', 'SF Mono', monospace;font-size:17.316px;fill:white;">0</text>
+            </g>
+            <g transform="matrix(1,0,0,1,16.3024,31.6566)">
+                <text x="414.962px" y="237.504px" style="font-family:'SFMono-Regular', 'SF Mono', monospace;font-size:17.316px;fill:white;">0</text>
+            </g>
+        </g>
+        <g transform="matrix(0.72408,0,0,0.72408,114.03,47.5413)">
+            <g transform="matrix(1,0,0,1,57.3702,-41.3839)">
+                <text x="414.962px" y="237.504px" style="font-family:'SFMono-Regular', 'SF Mono', monospace;font-size:17.316px;fill:white;">0</text>
+            </g>
+            <g transform="matrix(1,0,0,1,57.3702,31.6566)">
+                <text x="414.962px" y="237.504px" style="font-family:'SFMono-Regular', 'SF Mono', monospace;font-size:17.316px;fill:white;">0</text>
+            </g>
+            <g transform="matrix(1,0,0,1,0,-1.43545)">
+                <g transform="matrix(1,0,0,1,57.3702,6.34781)">
+                    <text x="404.258px" y="237.504px" style="font-family:'SFMono-Regular', 'SF Mono', monospace;font-size:17.316px;fill:white;">500</text>
+                </g>
+                <g transform="matrix(1,0,0,1,57.4252,-13.2211)">
+                    <text x="414.962px" y="237.504px" style="font-family:'SFMono-Regular', 'SF Mono', monospace;font-size:17.316px;fill:white;">2</text>
+                </g>
+                <g transform="matrix(0.749838,0,0,1,150.345,38.2785)">
+                    <path d="M416.927,189.628L456.324,189.628" style="fill:none;stroke:white;stroke-width:1.13px;"/>
+                </g>
+            </g>
+        </g>
+        <g transform="matrix(0.72408,0,0,0.72408,114.506,47.5413)">
+            <g transform="matrix(1,0,0,1,96.7886,31.6609)">
+                <text x="414.962px" y="237.504px" style="font-family:'SFMono-Regular', 'SF Mono', monospace;font-size:17.316px;fill:white;">1</text>
+            </g>
+            <g transform="matrix(1,0,0,1,97.0634,-4.85941)">
+                <text x="409.61px" y="237.504px" style="font-family:'SFMono-Regular', 'SF Mono', monospace;font-size:17.316px;fill:white;">-1</text>
+            </g>
+            <g transform="matrix(1,0,0,1,97.0634,-41.3797)">
+                <text x="409.61px" y="237.504px" style="font-family:'SFMono-Regular', 'SF Mono', monospace;font-size:17.316px;fill:white;">-1</text>
+            </g>
+        </g>
+        <g transform="matrix(0.72408,0,0,0.760396,114.853,42.575)">
+            <path d="M417.835,170.603L414.517,170.603L414.517,273.909L417.835,273.909" style="fill:none;stroke:white;stroke-width:1.35px;"/>
+        </g>
+        <g transform="matrix(-0.72408,0,0,0.760396,802.181,42.575)">
+            <path d="M417.835,170.603L414.517,170.603L414.517,273.909L417.835,273.909" style="fill:none;stroke:white;stroke-width:1.35px;"/>
+        </g>
+    </g>
+    <g transform="matrix(1,0,0,1,3.70634,-206.061)">
+        <g transform="matrix(1,-0,-0,1,-3.70634,206.061)">
+            <path d="M589.003,90.939L595.003,93.939L589.003,96.939C590.503,95.439 590.503,92.439 589.003,90.939Z" style="fill:white;"/>
+            <path d="M382.076,93.939L590.203,93.939" style="fill:none;stroke:white;stroke-width:1px;"/>
+        </g>
+    </g>
+</svg>

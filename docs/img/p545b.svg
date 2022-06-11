@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg width="100%" height="100%" viewBox="0 0 5500 2120" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;">
+    <g transform="matrix(8.33333,0,0,8.33333,-2372.99,-18.5571)">
+        <path d="M475.95,239.13L629.43,44.4L893.94,239.13L475.95,239.13Z" style="fill:rgb(217,217,217);fill-opacity:0.45;stroke:white;stroke-width:0.78px;stroke-dasharray:3.12,2.34,0,0;"/>
+    </g>
+    <g transform="matrix(8.09944,1.96049,1.96049,-8.09944,-2512.75,1213.35)">
+        <path d="M465.999,188.562L615.515,188.562L640.341,85.998L490.824,85.998L465.999,188.562Z" style="fill:white;fill-opacity:0.6;stroke:white;stroke-width:0.78px;stroke-linejoin:miter;stroke-miterlimit:8;"/>
+    </g>
+    <g transform="matrix(-8.09944,1.96049,1.96049,8.09944,10843.7,-1607.86)">
+        <path d="M734.019,90.378L883.535,90.378L908.361,192.942L758.845,192.942L734.019,90.378Z" style="fill:white;fill-opacity:0.6;stroke:white;stroke-width:0.78px;stroke-linejoin:miter;stroke-miterlimit:8;"/>
+    </g>
+    <g transform="matrix(5.84414,-5.94058,-5.94058,-5.84414,1980.35,2147.69)">
+        <path d="M-17.734,47.714L110.237,46.221" style="fill:none;fill-rule:nonzero;stroke:white;stroke-width:0.78px;stroke-miterlimit:10;"/>
+    </g>
+    <g transform="matrix(3.42733,-3.54053,-5.91239,-5.87214,3056.26,1079.25)">
+        <path d="M-17.734,47.714L110.237,46.221" style="fill:none;fill-rule:nonzero;stroke:white;stroke-width:0.94px;stroke-miterlimit:10;"/>
+    </g>
+    <g transform="matrix(1.98661,-2.10981,-5.89558,-5.88882,3570.04,569.027)">
+        <g transform="matrix(0.243972,-0.0874085,-0.244252,-0.0823044,-732.002,358.885)">
+            <path d="M3454.42,84.724L3516.54,64.257L3495.64,126.233C3495.71,105.551 3475.1,84.796 3454.42,84.724Z" style="fill:white;fill-rule:nonzero;"/>
+            <path d="M3253.51,325.462C3253.51,325.462 3412.6,167.469 3483.33,97.234" style="fill:none;fill-rule:nonzero;stroke:white;stroke-width:6.5px;stroke-miterlimit:10;"/>
+        </g>
+    </g>
+    <g transform="matrix(6.41571,5.31818,5.31818,-6.41571,4582.51,1118.84)">
+        <path d="M-14.249,-39.456L111.143,-41.192" style="fill:none;fill-rule:nonzero;stroke:white;stroke-width:0.78px;stroke-miterlimit:10;"/>
+    </g>
+    <g transform="matrix(8.37291,6.98682,5.29108,-6.43882,3152.11,-100.663)">
+        <g transform="matrix(0.0708501,0.07688,0.0582209,-0.092132,-217.467,-251.609)">
+            <path d="M2887.54,69.521L2824.04,53.826L2849.58,114.039C2847.94,93.421 2866.92,71.162 2887.54,69.521Z" style="fill:white;fill-rule:nonzero;"/>
+            <path d="M2859.66,84.189C3042.24,239.85 3864.76,941.101 3864.76,941.101" style="fill:none;fill-rule:nonzero;stroke:white;stroke-width:6.5px;stroke-miterlimit:10;"/>
+        </g>
+    </g>
+    <g transform="matrix(8.33333,0,0,8.33333,1593.01,1963.94)">
+        <path d="M0.03,1.23L418.02,1.23" style="fill:none;fill-rule:nonzero;stroke:white;stroke-width:0.78px;stroke-linejoin:miter;stroke-miterlimit:8;"/>
+    </g>
+    <g transform="matrix(-8.56164,5.0689e-16,5.24249e-16,8.27815,7202.4,122.776)">
+        <path d="M566.76,128.34C564.341,128.34 562.38,130.368 562.38,132.87C562.38,135.372 564.341,137.4 566.76,137.4C569.179,137.4 571.14,135.372 571.14,132.87C571.14,130.368 569.179,128.34 566.76,128.34" style="fill:rgb(91,155,213);stroke:white;stroke-width:0.53px;"/>
+    </g>
+    <g transform="matrix(-8.5034,5.03555e-16,5.20683e-16,8.22368,5640.45,1641.13)">
+        <path d="M475.95,35.94C473.514,35.94 471.54,37.982 471.54,40.5C471.54,43.018 473.514,45.06 475.95,45.06C478.386,45.06 480.36,43.018 480.36,40.5C480.36,37.982 478.386,35.94 475.95,35.94" style="fill:rgb(91,155,213);stroke:white;stroke-width:0.54px;"/>
+    </g>
+    <g transform="matrix(-8.5034,5.0689e-16,5.20683e-16,8.27815,12678,1602.67)">
+        <path d="M893.94,40.35C891.504,40.35 889.53,42.378 889.53,44.88C889.53,47.382 891.504,49.41 893.94,49.41C896.376,49.41 898.35,47.382 898.35,44.88C898.35,42.378 896.376,40.35 893.94,40.35" style="fill:rgb(91,155,213);stroke:white;stroke-width:0.54px;"/>
+    </g>
+    <g transform="matrix(-8.44595,5.03555e-16,5.17165e-16,8.22368,11025.4,276.045)">
+        <path d="M798.51,119.49C796.058,119.49 794.07,121.532 794.07,124.05C794.07,126.568 796.058,128.61 798.51,128.61C800.962,128.61 802.95,126.568 802.95,124.05C802.95,121.532 800.962,119.49 798.51,119.49" style="fill:rgb(91,155,213);stroke:white;stroke-width:0.54px;"/>
+    </g>
+    <g transform="matrix(-8.26446,4.89859e-16,5.06052e-16,8,8069.45,-1538.32)">
+        <path d="M628.86,232.47C626.855,232.47 625.23,234.149 625.23,236.22C625.23,238.291 626.855,239.97 628.86,239.97C630.865,239.97 632.49,238.291 632.49,236.22C632.49,234.149 630.865,232.47 628.86,232.47" style="fill:rgb(0,176,80);stroke:white;stroke-width:0.55px;"/>
+    </g>
+    <g transform="matrix(-8.33333,4.89859e-16,5.10269e-16,8,7147.01,-305.767)">
+        <path d="M571.2,157.62C569.212,157.62 567.6,159.299 567.6,161.37C567.6,163.441 569.212,165.12 571.2,165.12C573.188,165.12 574.8,163.441 574.8,161.37C574.8,159.299 573.188,157.62 571.2,157.62" style="fill:rgb(255,0,255);stroke:white;stroke-width:0.55px;"/>
+    </g>
+    <g transform="matrix(-8.26446,4.89859e-16,5.06052e-16,8,10390,138.663)">
+        <path d="M768.96,130.41C766.955,130.41 765.33,132.089 765.33,134.16C765.33,136.231 766.955,137.91 768.96,137.91C770.965,137.91 772.59,136.231 772.59,134.16C772.59,132.089 770.965,130.41 768.96,130.41" style="fill:rgb(255,0,255);stroke:white;stroke-width:0.55px;"/>
+    </g>
+    <g transform="matrix(1.35473,-8.22248,-8.22248,-1.35473,2397.8,1119.31)">
+        <g transform="matrix(0.0195081,-0.118404,-0.118404,-0.0195081,85.754,305.744)">
+            <path d="M2334.7,1174.77L2350.01,1222.69L2379.17,1181.69L2334.7,1174.77Z" style="fill:rgb(255,101,0);fill-rule:nonzero;"/>
+            <path d="M2357.85,1026.19L2387.01,985.193L2402.31,1033.12L2357.85,1026.19Z" style="fill:rgb(255,101,0);fill-rule:nonzero;"/>
+            <path d="M2355.55,1187.12C2362.54,1142.27 2374.48,1065.62 2381.47,1020.76" style="fill:none;fill-rule:nonzero;stroke:rgb(255,101,0);stroke-width:15px;stroke-linejoin:miter;stroke-miterlimit:8;"/>
+        </g>
+    </g>
+    <g transform="matrix(-7.82976,-2.85295,-2.85295,7.82976,4112.85,1229.28)">
+        <g transform="matrix(-0.112749,-0.0410824,-0.0410824,0.112749,514.219,30.3666)">
+            <path d="M4231.4,1302.91L4281.26,1296.19L4245.96,1260.34L4231.4,1302.91Z" style="fill:rgb(255,101,0);fill-rule:nonzero;"/>
+            <path d="M4070.3,1247.8L4035.01,1211.94L4084.87,1205.22L4070.3,1247.8Z" style="fill:rgb(255,101,0);fill-rule:nonzero;"/>
+            <path d="M4247.2,1284.54C4200.22,1268.47 4116.04,1239.67 4069.07,1223.6" style="fill:none;fill-rule:nonzero;stroke:rgb(255,101,0);stroke-width:15px;stroke-linejoin:miter;stroke-miterlimit:8;"/>
+        </g>
+    </g>
+    <g transform="matrix(8.91984,-1.11825,-1.03661,-8.26861,1464.68,1140.89)">
+        <g transform="matrix(0.110375,-0.0149271,-0.0138373,-0.119068,-145.877,157.707)">
+            <path d="M2298.53,981.692L2327.68,998.815L2300.66,1019.13" style="fill:none;fill-rule:nonzero;stroke:white;stroke-width:8.33px;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:10;"/>
+            <path d="M1428.08,1049.98C1428.08,1049.98 2240.79,1003.76 2327.68,998.815" style="fill:none;fill-rule:nonzero;stroke:white;stroke-width:8.33px;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:8;"/>
+        </g>
+    </g>
+    <g transform="matrix(8.91984,-1.11825,-1.03661,-8.26861,1464.68,1140.89)">
+        <g transform="matrix(0.110375,-0.0149271,-0.0138373,-0.119068,-145.877,157.707)">
+            <path d="M4029.72,1122.27L4018.28,1154.08L3993.32,1131.29" style="fill:none;fill-rule:nonzero;stroke:white;stroke-width:8.33px;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:10;"/>
+            <path d="M3905.74,699.982C3905.74,699.982 4003.7,1095.23 4018.28,1154.08" style="fill:none;fill-rule:nonzero;stroke:white;stroke-width:8.33px;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:8;"/>
+        </g>
+    </g>
+    <g transform="matrix(8.91984,-1.11825,-1.03661,-8.26861,1464.68,1140.89)">
+        <g transform="matrix(0.110375,-0.0149271,-0.0138373,-0.119068,-145.877,157.707)">
+            <path d="M4210.25,1192.66L4179.06,1205.69L4179.03,1171.89" style="fill:none;fill-rule:nonzero;stroke:white;stroke-width:8.33px;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:10;"/>
+            <path d="M4732.39,374.208C4732.39,374.208 4230.05,1129.07 4179.06,1205.69" style="fill:none;fill-rule:nonzero;stroke:white;stroke-width:8.33px;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:8;"/>
+        </g>
+    </g>
+    <g transform="matrix(8.91984,-1.11825,-1.03661,-8.26861,1464.68,1140.89)">
+        <g transform="matrix(0.110375,-0.0149271,-0.0138373,-0.119068,-145.877,157.707)">
+            <path d="M2300.8,1101.35L2334.13,1107.01L2316.09,1135.59" style="fill:none;fill-rule:nonzero;stroke:white;stroke-width:8.33px;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:10;"/>
+            <path d="M1288.96,1573.65C1288.96,1573.65 2243.68,1147.39 2334.13,1107.01" style="fill:none;fill-rule:nonzero;stroke:white;stroke-width:8.33px;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:8;"/>
+        </g>
+    </g>
+    <g transform="matrix(1,0,0,1,729.071,1406.88)">
+        <text x="565.421px" y="597.615px" style="font-family:'Times-BoldItalic', 'Times';font-weight:700;font-style:italic;font-size:185.219px;fill:white;">C</text>
+        <text x="688.96px" y="659.293px" style="font-family:'Times-BoldItalic', 'Times';font-weight:700;font-style:italic;font-size:107.982px;fill:white;">1</text>
+    </g>
+    <g transform="matrix(1,0,0,1,4607.62,1406.88)">
+        <text x="565.421px" y="597.615px" style="font-family:'Times-BoldItalic', 'Times';font-weight:700;font-style:italic;font-size:185.219px;fill:white;">C</text>
+        <text x="688.96px" y="659.293px" style="font-family:'Times-BoldItalic', 'Times';font-weight:700;font-style:italic;font-size:107.982px;fill:white;">2</text>
+    </g>
+    <g transform="matrix(1,0,0,1,3827.95,673.611)">
+        <text x="580.886px" y="597.615px" style="font-family:'Times-BoldItalic', 'Times';font-weight:700;font-style:italic;font-size:185.219px;fill:white;">p</text>
+        <text x="673.495px" y="659.293px" style="font-family:'Times-BoldItalic', 'Times';font-weight:700;font-style:italic;font-size:107.982px;fill:white;">2</text>
+    </g>
+    <g transform="matrix(1,0,0,1,1858.72,710.881)">
+        <text x="580.886px" y="597.615px" style="font-family:'Times-BoldItalic', 'Times';font-weight:700;font-style:italic;font-size:185.219px;fill:white;">p</text>
+        <text x="673.495px" y="659.293px" style="font-family:'Times-BoldItalic', 'Times';font-weight:700;font-style:italic;font-size:107.982px;fill:white;">1</text>
+    </g>
+    <g transform="matrix(0.675918,0,0,0.675918,2904.24,1184.46)">
+        <text x="106.399px" y="597.615px" style="font-family:'Times-Roman', 'Times';font-size:185.219px;fill:white;">Epipolar Plane</text>
+    </g>
+    <g transform="matrix(1,0,0,1,-7.58689,546.07)">
+        <g transform="matrix(0.675918,0,0,0.675918,581.739,133.838)">
+            <text x="85.733px" y="597.615px" style="font-family:'Times-Roman', 'Times';font-size:185.219px;fill:rgb(255,0,255);">Projected Point</text>
+        </g>
+        <g transform="matrix(0.675918,0,0,0.675918,581.739,262.37)">
+            <text x="180.288px" y="597.615px" style="font-family:'Times-Italic', 'Times';font-style:italic;font-size:185.219px;fill:rgb(255,0,255);">π(</text>
+            <text x="343.62px" y="597.615px" style="font-family:'Times-BoldItalic', 'Times';font-weight:700;font-style:italic;font-size:185.219px;fill:rgb(255,0,255);">P</text>
+            <text x="456.759px" y="597.615px" style="font-family:'Times-Italic', 'Times';font-style:italic;font-size:185.219px;fill:rgb(255,0,255);">,</text>
+            <text x="549.368px" y="597.615px" style="font-family:'Times-BoldItalic', 'Times';font-weight:700;font-style:italic;font-size:185.219px;fill:rgb(255,0,255);">K</text>
+            <text x="672.907px" y="659.293px" style="font-family:'Times-BoldItalic', 'Times';font-weight:700;font-style:italic;font-size:107.982px;fill:rgb(255,0,255);">1</text>
+            <text x="726.898px" y="597.615px" style="font-family:'Times-Italic', 'Times';font-style:italic;font-size:185.219px;fill:rgb(255,0,255);">, I, 0)</text>
+        </g>
+    </g>
+    <g transform="matrix(1,0,0,1,2951.86,-8.01577)">
+        <g transform="matrix(0.675918,0,0,0.675918,581.739,133.838)">
+            <text x="85.733px" y="597.615px" style="font-family:'Times-Roman', 'Times';font-size:185.219px;fill:rgb(255,0,255);">Projected Point</text>
+        </g>
+        <g transform="matrix(0.675918,0,0,0.675918,581.739,262.37)">
+            <text x="149.357px" y="597.615px" style="font-family:'Times-Italic', 'Times';font-style:italic;font-size:185.219px;fill:rgb(255,0,255);">π(</text>
+            <text x="312.69px" y="597.615px" style="font-family:'Times-BoldItalic', 'Times';font-weight:700;font-style:italic;font-size:185.219px;fill:rgb(255,0,255);">P</text>
+            <text x="425.829px" y="597.615px" style="font-family:'Times-Italic', 'Times';font-style:italic;font-size:185.219px;fill:rgb(255,0,255);">,</text>
+            <text x="518.438px" y="597.615px" style="font-family:'Times-BoldItalic', 'Times';font-weight:700;font-style:italic;font-size:185.219px;fill:rgb(255,0,255);">K</text>
+            <text x="641.977px" y="659.293px" style="font-family:'Times-BoldItalic', 'Times';font-weight:700;font-style:italic;font-size:107.982px;fill:rgb(255,0,255);">2</text>
+            <text x="695.968px" y="597.615px" style="font-family:'Times-Italic', 'Times';font-style:italic;font-size:185.219px;fill:rgb(255,0,255);">, R, T)</text>
+        </g>
+    </g>
+    <g id="_-π-P--K2--R--T--" serif:id="(π(P, K2, R, T))" transform="matrix(0.890804,0,0,0.890804,2181.96,-196.519)">
+        <text x="597.617px" y="597.615px" style="font-family:'Times-BoldItalic', 'Times';font-weight:700;font-style:italic;font-size:185.219px;fill:rgb(1,176,80);">P</text>
+    </g>
+    <g transform="matrix(1,0,0,1,-360.919,1063.71)">
+        <g transform="matrix(0.675918,0,0,0.675918,581.739,133.838)">
+            <text x="-220.085px" y="597.615px" style="font-family:'Times-Roman', 'Times';font-size:185.219px;fill:rgb(255,101,0);">Left Reprojection Error</text>
+        </g>
+        <g transform="matrix(0.675918,0,0,0.675918,581.739,262.37)">
+            <text x="1.988px" y="597.615px" style="font-family:'Times-Roman', 'Times';font-size:185.219px;fill:rgb(255,101,0);">||</text>
+            <text x="76.148px" y="597.615px" style="font-family:'Times-BoldItalic', 'Times';font-weight:700;font-style:italic;font-size:185.219px;fill:rgb(255,101,0);">p</text>
+            <text x="168.757px" y="659.293px" style="font-family:'Times-BoldItalic', 'Times';font-weight:700;font-style:italic;font-size:107.982px;fill:rgb(255,101,0);">1</text>
+            <text x="222.748px" y="597.615px" style="font-family:'Times-Italic', 'Times';font-style:italic;font-size:185.219px;fill:rgb(255,101,0);">-π(</text>
+            <text x="447.76px" y="597.615px" style="font-family:'Times-BoldItalic', 'Times';font-weight:700;font-style:italic;font-size:185.219px;fill:rgb(255,101,0);">P</text>
+            <text x="560.899px" y="597.615px" style="font-family:'Times-Italic', 'Times';font-style:italic;font-size:185.219px;fill:rgb(255,101,0);">,</text>
+            <text x="653.508px" y="597.615px" style="font-family:'Times-BoldItalic', 'Times';font-weight:700;font-style:italic;font-size:185.219px;fill:rgb(255,101,0);">K</text>
+            <text x="777.047px" y="659.293px" style="font-family:'Times-BoldItalic', 'Times';font-weight:700;font-style:italic;font-size:107.982px;fill:rgb(255,101,0);">1</text>
+            <text x="831.038px" y="597.615px" style="font-family:'Times-Italic', 'Times';font-style:italic;font-size:185.219px;fill:rgb(255,101,0);">, I, 0)</text>
+            <text x="1232.22px" y="597.615px" style="font-family:'Times-Roman', 'Times';font-size:185.219px;fill:rgb(255,101,0);">||</text>
+        </g>
+    </g>
+    <g transform="matrix(1,0,0,1,3776.38,-354.751)">
+        <g transform="matrix(0.675918,0,0,0.675918,581.739,133.838)">
+            <text x="-271.68px" y="597.615px" style="font-family:'Times-Roman', 'Times';font-size:185.219px;fill:rgb(255,101,0);">Right Reprojection Error</text>
+        </g>
+        <g transform="matrix(0.675918,0,0,0.675918,581.739,262.37)">
+            <text x="-28.942px" y="597.615px" style="font-family:'Times-Roman', 'Times';font-size:185.219px;fill:rgb(255,101,0);">||</text>
+            <text x="45.218px" y="597.615px" style="font-family:'Times-BoldItalic', 'Times';font-weight:700;font-style:italic;font-size:185.219px;fill:rgb(255,101,0);">p</text>
+            <text x="137.827px" y="659.293px" style="font-family:'Times-BoldItalic', 'Times';font-weight:700;font-style:italic;font-size:107.982px;fill:rgb(255,101,0);">2</text>
+            <text x="191.818px" y="597.615px" style="font-family:'Times-Italic', 'Times';font-style:italic;font-size:185.219px;fill:rgb(255,101,0);">-π(</text>
+            <text x="416.83px" y="597.615px" style="font-family:'Times-BoldItalic', 'Times';font-weight:700;font-style:italic;font-size:185.219px;fill:rgb(255,101,0);">P</text>
+            <text x="529.968px" y="597.615px" style="font-family:'Times-Italic', 'Times';font-style:italic;font-size:185.219px;fill:rgb(255,101,0);">,</text>
+            <text x="622.578px" y="597.615px" style="font-family:'Times-BoldItalic', 'Times';font-weight:700;font-style:italic;font-size:185.219px;fill:rgb(255,101,0);">K</text>
+            <text x="746.117px" y="659.293px" style="font-family:'Times-BoldItalic', 'Times';font-weight:700;font-style:italic;font-size:107.982px;fill:rgb(255,101,0);">2</text>
+            <text x="800.108px" y="597.615px" style="font-family:'Times-Italic', 'Times';font-style:italic;font-size:185.219px;fill:rgb(255,101,0);">, R, T)</text>
+            <text x="1263.15px" y="597.615px" style="font-family:'Times-Roman', 'Times';font-size:185.219px;fill:rgb(255,101,0);">||</text>
+        </g>
+    </g>
+</svg>
