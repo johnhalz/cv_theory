@@ -138,6 +138,25 @@ From the example above, we can see that this is far fewer than trying out all po
 !!! important
     The number of points does not influence the minimum number of iterations ($k$), only $w$ does!
 
+### RANSAC applied to General Model Fitting
+
+1. **Initial** - Let $A$ be a set of $N$ points
+2. Repeat until maximum number of iterations $k$ reached:
+    1. Randomly select a sample of $s$ points from $A$
+    2. **Fit a model** from the $s$ points
+    3. Compute the **distances** of all other points **from this model**
+    4. Construct the inlier set (i.e. count the number of points whose distance $<d$)
+    5. Store these inliers
+
+3. The set with the maximum number of inliers is chosen as a solution to the problem
+
+!!! tip
+    The formula for calculating the number of iterations is commonly written as a function of the **fraction of outliers $\epsilon$**
+
+    $$
+    k = \frac{\log(1-p)}{\log(1-(1-\epsilon)^s)}
+    $$
+
 ### The Three Key Ingredients of RANSAC
 In order to implement RANSAC for Structure From Motion (SFM), we need three key ingredients:
 
@@ -157,3 +176,150 @@ In order to implement RANSAC for Structure From Motion (SFM), we need three key 
     - Directional error
     - Epipolar line distance
     - Reprojection error
+
+### Applying 8-Point RANSAC to SfM Problem
+
+Let’s consider the following image pair and its image correspondences (e.g., Harris, SIFT, etc.), denoted by arrows:
+
+![p578](../img/p578w.svg#only-light)
+![p578](../img/p578b.svg#only-dark)
+
+For convenience, we overlay the features of the second image on the first image and use arrows to denote the *motion vectors* of the features:
+
+![p579](../img/p579.svg)
+
+1. Randomly select 8 point correspondences:
+    ![p580](../img/p580.svg)
+
+2. Fit the model to all other points and count the inliers:
+    ![p580](../img/p580.svg)
+
+3. Repeat steps 1-2 $k$ times, where $k$ is:
+
+    $$
+    k = \frac{\log(1-p)}{\log(1-(1-\epsilon)^8)}
+    $$
+
+#### RANSAC Iterations $k$ Vs. $s$
+
+$k$ is exponential in the number of points $s$ necessary to estimate the model:
+
+- 8-point RANSAC
+    - Assuming:
+        - $p = 99\%$
+        - $\epsilon = 50\%$ (fraction of outliers)
+        - $s = 8$ points (8-point algorithm)
+
+    $k = 1177$ iterations
+
+- 5-point RANSAC
+    - Assuming:
+        - $p = 99\%$
+        - $\epsilon = 50\%$ (fraction of outliers)
+        - $s = 5$ points (5-point algorithm)
+
+    $k = 145$ iterations
+
+- 2-point RANSAC (e.g., line fitting)
+    - Assuming:
+        - $p = 99\%$
+        - $\epsilon = 50\%$ (fraction of outliers)
+        - $s = 2$ points
+
+    $k = 16$ iterations
+
+As observed, $k$ is exponential in the number of points $s$ necessary to estimate the model.
+
+- The 8-point algorithm is extremely simple and was very successful; however, it requires more than 1177 iterations
+- Because of this, there has been a large interest by the research community in using smaller motion parameterizations (i.e., smaller $s$)
+- The first efficient solution to the minimal-case solution (5-point algorithm) took almost a century (Kruppa 1913 → Nister 2004)
+- The 5-point RANSAC (Nister 2004) only requires 145 iterations; however:
+    - The 5-point algorithm can return up to 10 solutions of $E$ (worst case scenario)
+    - The 8-point algorithm only returns a unique solution of $E$
+
+!!! question "Is it possible to use less than 5 points for RANSAC?"
+    Yes, if you use motion constraints!
+
+### Planar Motion Constraint
+
+Planar motion is described by three parameters: $\theta$, $\phi$, $\rho$:
+
+$$
+R = \begin{bmatrix}
+\cos\theta & -\sin\theta & 0 \\
+\sin\theta & \cos\theta & 0 \\
+0 & 0 & 1
+\end{bmatrix} \qquad T = \begin{bmatrix}
+\rho\cos\phi \\
+\rho\sin\phi \\
+0
+\end{bmatrix}
+$$
+
+Let’s compute the epipolar geometry:
+
+- Essential matrix: $E = [T_\times]R$
+- Epipolar constraint: $\overline{p}_2^T E \overline{p}_1 = 0$
+
+Observe that $E$ has 2 DoF ($\theta$, $\phi$, because $\rho$ is the scale factor); thus, **2 correspondences are sufficient** to estimate $\theta$ and $\phi$[^4].
+[^4]: *"2-Point RANSAC", Ortin & Montiel, Indoor Robot Motion Based on Monocular Images* - Robotica, 2001 - [PDF](http://webdiis.unizar.es/%7Ejosemari/ortin_robotica_2001.pdf)
+
+$$
+E = [T_\times]R = \begin{bmatrix}
+0 & 0 & \rho\sin\phi \\
+0 & 0 & -\rho\cos\phi \\
+-\rho\sin(\phi-\theta) & \rho\cos(\phi-\theta) & 0
+\end{bmatrix}
+$$
+
+!!! question "Can we use less than 2 point correspondences?"
+    Yes, if we exploit wheeled vehicles with **non-holonomic constraints**.
+
+Wheeled vehicles, like cars, follow locally-planar circular motion about the Instantaneous Center of Rotation (ICR).
+
+Therefore $\phi = \theta/2$ → giving only 1 DoF ($\theta$). Thus, only 1 point correspondence is sufficient[^5].
+[^5]: *Scaramuzza, 1-Point-RANSAC Structure from Motion for Vehicle-Mounted Cameras by Exploiting Non-Holonomic Constraints* - International Journal of Computer Vision, 2011 - [PDF](https://rpg.ifi.uzh.ch/docs/IJCV11_scaramuzza.pdf)
+
+In this case, the essential matrix is therefore:
+
+$$
+E = [T_\times]R = \begin{bmatrix}
+0 & 0 & \rho\sin\frac{\theta}{2} \\
+0 & 0 & \rho\cos\frac{\theta}{2} \\
+\rho\sin\frac{\theta}{2} & -\rho\cos\frac{\theta}{2} & 0
+\end{bmatrix}
+$$
+
+and the epipolar constraint gives us the following equation:
+
+$$
+\theta = -2\tan^{-1}\left(\frac{v_2 - v_1}{u_2 + u_1} \right)
+$$
+
+As only one degree of freedom needs to be estimated, we only need 1 iteration to find the inliers.
+
+## State of the Art
+
+### Differentiable RANSAC
+Random Sample Consensus (RANSAC)[^7] is not differentiable since it relies on selecting a hypothesis based on maximizing the number of inliers (i.e., $\arg\max$).
+[^7]: *E. Brachmann et al., DSAC - Differentiable RANSAC for Camera Localization* - International Conference on Computer Vision and Pattern Recognition (CVPR), 2017 - [PDF](https://arxiv.org/abs/1611.05705), [Video](https://www.youtube.com/watch?v=YWSGq7CUSRA)
+
+- DSAC shows how sample consensus can be used in a differentiable way
+- This enables the use of sample consensus in a variety of learning tasks.
+
+### Deep Fundamental Matrix Estimation
+Deep Fundamental Matrix Estimation[^8] takes in two sets of noisy local features (coordinates + descriptors) contaminated by outliers and outputs the fundamental matrix.
+[^8]: *Ranftl, Koltun, Deep Fundamental Matrix Estimation* - European Conference on Computer Vision (ECCV), 2018 - [PDF](http://vladlen.info/papers/deep-fundamental.pdf)
+
+**Idea**: Solve a weighted homogeneous least-squares problem, where robust weights are estimated using deep networks.
+**Robust**: Handles extreme wide-baseline image pairs
+
+### SuperGlue
+
+SuperGlue[^9] is a learning feature matching with graph neural networks.
+[^9]: *Sarlin, DeTone, Malisiewicz, Rabinovich, SuperGlue: Learning Feature Matching with Graph Neural Networks* - International Conference on Computer Vision and Pattern Recognition (CVPR), 2020 - [PDF](https://arxiv.org/pdf/1911.11763.pdf), [Code](https://github.com/magicleap/SuperGluePretrainedNetwork)
+
+- **Input**: Two sets of noisy local features (coordinates + descriptors) contaminated by outliers.
+- **Output**: Strong & outlier-free matches
+- **Combines deep learning with classical optimization** (Graph Neural Networks, Attention, Optimal Transport)
+- **Robust**: Handles extreme wide-baseline image pairs
