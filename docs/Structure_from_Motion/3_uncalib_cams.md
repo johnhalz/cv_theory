@@ -108,7 +108,7 @@ $$
 
 When using SVD to solve the equation above, we have **poor numerical conditioning**, making our solution **very sensitive to noise**. This can fixed by rescaling the input data, as shown in the example below:
 
-!!! info
+!!! example
     It can be common to have the input data as shown below. The differences in magnitude between the columns is readily visible in the matrix below:
 
     $$
