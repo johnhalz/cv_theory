@@ -1,9 +1,5 @@
-# cv_theory
-
-Computer Vision Theory Website
-
-## Roadmap
-- [ ] Move over all courses from GitHub.
+# CV Theory
+This website contains all learned elements on computer vision theory
 
 ## Authors and acknowledgment
 Author: John Halazonetis
