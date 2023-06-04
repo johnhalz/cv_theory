@@ -1,0 +1,1153 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../3_uncalib_cams/">
+      
+      
+        <link rel="next" href="../../Visual_Odometry/1_vo_overview/">
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.4.3, mkdocs-material-9.1.15">
+    
+    
+      
+        <title>Robust Structure from Motion - Computer Vision Theory</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.26e3688c.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ecc896b0.min.css">
+      
+      
+
+    
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&"object"==typeof palette.color)for(var key of Object.keys(palette.color))document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#robust-structure-from-motion" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Computer Vision Theory" class="md-header__button md-logo" aria-label="Computer Vision Theory" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Computer Vision Theory
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Robust Structure from Motion
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+          
+            
+            
+            
+            <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+            
+              <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_2" hidden>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 6H7c-3.31 0-6 2.69-6 6s2.69 6 6 6h10c3.31 0 6-2.69 6-6s-2.69-6-6-6zm0 10H7c-2.21 0-4-1.79-4-4s1.79-4 4-4h10c2.21 0 4 1.79 4 4s-1.79 4-4 4zM7 9c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg>
+              </label>
+            
+          
+            
+            
+            
+            <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_2">
+            
+              <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 7H7a5 5 0 0 0-5 5 5 5 0 0 0 5 5h10a5 5 0 0 0 5-5 5 5 0 0 0-5-5m0 8a3 3 0 0 1-3-3 3 3 0 0 1 3-3 3 3 0 0 1 3 3 3 3 0 0 1-3 3Z"/></svg>
+              </label>
+            
+          
+        </form>
+      
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Computer Vision Theory" class="md-nav__button md-logo" aria-label="Computer Vision Theory" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    Computer Vision Theory
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        Welcome Page
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../introduction/" class="md-nav__link">
+        Introduction
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+          Structure from Motion
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          Structure from Motion
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../1_sfm/" class="md-nav__link">
+        Structure from Motion (SfM)
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../2_calib_cams/" class="md-nav__link">
+        SfM with Calibrated Cameras
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../3_uncalib_cams/" class="md-nav__link">
+        SfM with Uncalibrated Cameras
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Robust Structure from Motion
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        Robust Structure from Motion
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#effect-of-outliers-on-visual-odometry" class="md-nav__link">
+    Effect of Outliers on Visual Odometry
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#expectation-maximization-em-algorithm" class="md-nav__link">
+    Expectation Maximization (EM) Algorithm
+  </a>
+  
+    <nav class="md-nav" aria-label="Expectation Maximization (EM) Algorithm">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#em-applied-to-line-fitting" class="md-nav__link">
+    EM Applied to Line Fitting
+  </a>
+  
+    <nav class="md-nav" aria-label="EM Applied to Line Fitting">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#problem-of-em-algorithm" class="md-nav__link">
+    Problem of EM Algorithm
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#graduated-non-convexity-algorithm-gnc" class="md-nav__link">
+    Graduated Non-Convexity algorithm (GNC)
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#random-sample-consensus-ransac" class="md-nav__link">
+    Random Sample Consensus (RANSAC)
+  </a>
+  
+    <nav class="md-nav" aria-label="Random Sample Consensus (RANSAC)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#computing-number-of-ransac-iterations" class="md-nav__link">
+    Computing Number of RANSAC Iterations
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ransac-applied-to-general-model-fitting" class="md-nav__link">
+    RANSAC applied to General Model Fitting
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#the-three-key-ingredients-of-ransac" class="md-nav__link">
+    The Three Key Ingredients of RANSAC
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#applying-8-point-ransac-to-sfm-problem" class="md-nav__link">
+    Applying 8-Point RANSAC to SfM Problem
+  </a>
+  
+    <nav class="md-nav" aria-label="Applying 8-Point RANSAC to SfM Problem">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ransac-iterations-k-vs-s" class="md-nav__link">
+    RANSAC Iterations \(k\) Vs. \(s\)
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#planar-motion-constraint" class="md-nav__link">
+    Planar Motion Constraint
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#state-of-the-art" class="md-nav__link">
+    State of the Art
+  </a>
+  
+    <nav class="md-nav" aria-label="State of the Art">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#differentiable-ransac" class="md-nav__link">
+    Differentiable RANSAC
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#deep-fundamental-matrix-estimation" class="md-nav__link">
+    Deep Fundamental Matrix Estimation
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#superglue" class="md-nav__link">
+    SuperGlue
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+          Visual Odometry
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_4">
+          <span class="md-nav__icon md-icon"></span>
+          Visual Odometry
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Visual_Odometry/1_vo_overview/" class="md-nav__link">
+        Visual Odometry Overview
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Visual_Odometry/2_image_formation/" class="md-nav__link">
+        Image Formation
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#effect-of-outliers-on-visual-odometry" class="md-nav__link">
+    Effect of Outliers on Visual Odometry
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#expectation-maximization-em-algorithm" class="md-nav__link">
+    Expectation Maximization (EM) Algorithm
+  </a>
+  
+    <nav class="md-nav" aria-label="Expectation Maximization (EM) Algorithm">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#em-applied-to-line-fitting" class="md-nav__link">
+    EM Applied to Line Fitting
+  </a>
+  
+    <nav class="md-nav" aria-label="EM Applied to Line Fitting">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#problem-of-em-algorithm" class="md-nav__link">
+    Problem of EM Algorithm
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#graduated-non-convexity-algorithm-gnc" class="md-nav__link">
+    Graduated Non-Convexity algorithm (GNC)
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#random-sample-consensus-ransac" class="md-nav__link">
+    Random Sample Consensus (RANSAC)
+  </a>
+  
+    <nav class="md-nav" aria-label="Random Sample Consensus (RANSAC)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#computing-number-of-ransac-iterations" class="md-nav__link">
+    Computing Number of RANSAC Iterations
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ransac-applied-to-general-model-fitting" class="md-nav__link">
+    RANSAC applied to General Model Fitting
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#the-three-key-ingredients-of-ransac" class="md-nav__link">
+    The Three Key Ingredients of RANSAC
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#applying-8-point-ransac-to-sfm-problem" class="md-nav__link">
+    Applying 8-Point RANSAC to SfM Problem
+  </a>
+  
+    <nav class="md-nav" aria-label="Applying 8-Point RANSAC to SfM Problem">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ransac-iterations-k-vs-s" class="md-nav__link">
+    RANSAC Iterations \(k\) Vs. \(s\)
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#planar-motion-constraint" class="md-nav__link">
+    Planar Motion Constraint
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#state-of-the-art" class="md-nav__link">
+    State of the Art
+  </a>
+  
+    <nav class="md-nav" aria-label="State of the Art">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#differentiable-ransac" class="md-nav__link">
+    Differentiable RANSAC
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#deep-fundamental-matrix-estimation" class="md-nav__link">
+    Deep Fundamental Matrix Estimation
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#superglue" class="md-nav__link">
+    SuperGlue
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+<h1 id="robust-structure-from-motion">Robust Structure from Motion</h1>
+<p>When matching points between two images or more, matched points are usually contaminated by <strong>outliers</strong> (i.e., wrong matches).</p>
+<p><img alt="p550" src="../../img/p550w.svg#only-light" />
+<img alt="p550" src="../../img/p550b.svg#only-dark" /></p>
+<p>Causes of outliers are:</p>
+<ul>
+<li>Repetitive features</li>
+<li>Changes in view point (including scale) and illumination</li>
+<li>Image noise</li>
+<li>Occlusions</li>
+<li>Image blur</li>
+</ul>
+<p>For reliable and accurate visual odometry, outliers must be removed. This is the task of <strong>robust estimation</strong>.</p>
+<h2 id="effect-of-outliers-on-visual-odometry">Effect of Outliers on Visual Odometry</h2>
+<p>In the example below, we can see how outliers can greatly impact the result of our estimation process, especially over large distances.</p>
+<p><img alt="p551" src="../../img/p551.svg" /></p>
+<h2 id="expectation-maximization-em-algorithm">Expectation Maximization (EM) Algorithm</h2>
+<p>EM is a simple <strong>method for model fitting in the presence of outliers</strong> (very noisy points or wrong data).</p>
+<ul>
+<li>It can be applied to all sorts of problems where the goal is to estimate the parameters of a model from the data (e.g., camera calibration, Structure from Motion, DLT, PnP, P3P, Homography, etc.)</li>
+</ul>
+<p>Let’s review EM applied to the line fitting problem.</p>
+<h3 id="em-applied-to-line-fitting">EM Applied to Line Fitting</h3>
+<ol>
+<li>Calculate model parameters that fit all data points
+    <img alt="p554" src="../../img/p554w.svg#only-light" />
+    <img alt="p554" src="../../img/p554b.svg#only-dark" /></li>
+<li><strong>Estimate's Expectation</strong>: Calculate the residual error <span class="arithmatex">\(r_i\)</span> for each data point and assign it a weight (e.g., <span class="arithmatex">\(w_i=e^{-r_i^2}\)</span>, where <span class="arithmatex">\(r_i\)</span> is the point-to-line distance) representing the probability that such assignment is correct.
+    <img alt="p555" src="../../img/p555w.svg#only-light" />
+    <img alt="p555" src="../../img/p555b.svg#only-dark" /></li>
+<li><strong>Maximization Step</strong>: Re-estimate line parameters (e.g., using weighted least-squares: <span class="arithmatex">\(\min\sum w_i r_i^2\)</span>).
+    <img alt="p556" src="../../img/p556w.svg#only-light" />
+    <img alt="p556" src="../../img/p556b.svg#only-dark" /></li>
+<li>Iterate steps 2 and 3 until convergence.</li>
+<li>Select as inliers the data points with a weight higher than a given threshold.
+    <img alt="p557" src="../../img/p557w.svg#only-light" />
+    <img alt="p557" src="../../img/p557b.svg#only-dark" /></li>
+</ol>
+<h4 id="problem-of-em-algorithm">Problem of EM Algorithm</h4>
+<p>The EM algorithm is sensitive to the initial condition. It is not robust to outliers if the initial condition is far from the ground truth.</p>
+<p>Solutions: </p>
+<ul>
+<li>GNC Algorithm</li>
+<li>RANSAC Algorithm</li>
+</ul>
+<h2 id="graduated-non-convexity-algorithm-gnc">Graduated Non-Convexity algorithm (GNC)</h2>
+<p>At each iteration, EM estimates the model by minimizing the sum of squared residuals <span class="arithmatex">\(\sum w_i r_i^2\)</span>. While this is a convex function, it is not robust to outliers.</p>
+<p>Idea of Graduated Non-Convexity (GNC)<sup id="fnref:1"><a class="footnote-ref" href="#fn:1">1</a></sup><sup id="fnref:2"><a class="footnote-ref" href="#fn:2">2</a></sup>:</p>
+<ul>
+<li>Optimize a surrogate function <span class="arithmatex">\(\sum \rho_\mu(r_i)\)</span>, where <span class="arithmatex">\(\mu\)</span> controls the amount of non-convexity.</li>
+<li>Start by solving the non-robust convex optimization function (<span class="arithmatex">\(\mu\rightarrow 0\)</span>, i.e., least squares) and gradually increase non-convexity (<span class="arithmatex">\(\mu \rightarrow \infty\)</span>) until robustness is achieved.</li>
+<li>It is shown in <sup id="fnref2:1"><a class="footnote-ref" href="#fn:1">1</a></sup> that GNC is robust up to 90% of outliers with fewer up to five times iterations than RANSAC.</li>
+</ul>
+<p><img alt="p559" src="../../img/p559w.svg#only-light" />
+<img alt="p559" src="../../img/p559b.svg#only-dark" /></p>
+<h2 id="random-sample-consensus-ransac">Random Sample Consensus (RANSAC)</h2>
+<p>RANSAC<sup id="fnref:3"><a class="footnote-ref" href="#fn:3">3</a></sup> has become the <strong>standard method for model fitting in the presence of outliers</strong> (very noisy points or wrong data).</p>
+<ul>
+<li>It is <strong>non-deterministic</strong>: you get a different result every time you run it.</li>
+<li>Significantly <strong>outperforms the EM algorithm</strong>, it is not sensitive to the initial condition, and does not get stuck in local maxima.</li>
+<li>It can be applied to all sorts of problems where the goal is to <strong>estimate the parameters of a model from the data</strong> (e.g., camera calibration, Structure from Motion, DLT, PnP, P3P, Homography, etc.)</li>
+</ul>
+<p>Let’s review RANSAC for line fitting and see how we can use it to do Structure from Motion</p>
+<ol>
+<li>Select sample of 2 points at random from a set of points.</li>
+<li>Calculate model parameters that fit the data in the sample.</li>
+<li>Calculate the residual error for each data point.</li>
+<li>Select data that support current hypothesis.</li>
+<li>Repeat steps 1-4 <span class="arithmatex">\(k\)</span> times.</li>
+<li>Select the set with the maximum number of inliers obtained within <span class="arithmatex">\(k\)</span> iterations.</li>
+</ol>
+<div class="admonition question">
+<p class="admonition-title">How many iterations does RANSAC need?</p>
+<p>Ideally: Check all possible combinations of 2 points in a dataset of <span class="arithmatex">\(N\)</span> points.</p>
+<p>Number of pairwise combinations: <span class="arithmatex">\(\frac{N(N-1)}{2}\)</span></p>
+<p>This value can be computationally unfeasible if <span class="arithmatex">\(N\)</span> is too large.
+<strong>Example</strong>: For 1000 points you need to check all <span class="arithmatex">\(1000\cdot 999/2\simeq 500000\)</span> possibilities</p>
+</div>
+<div class="admonition question">
+<p class="admonition-title">Do we really need to check all possibilities or can we stop RANSAC after some iterations?</p>
+<p>Checking a subset of combinations is enough if we have a rough estimate of the percentage of inliers in our dataset.</p>
+<p>This can be done in a probabilistic way.</p>
+</div>
+<h3 id="computing-number-of-ransac-iterations">Computing Number of RANSAC Iterations</h3>
+<p>For this section, let us use the following notation:</p>
+<ul>
+<li><span class="arithmatex">\(N\)</span>: Total Number of data points</li>
+<li><span class="arithmatex">\(w = \frac{\text{number of inliers}}{N}\)</span></li>
+<li><span class="arithmatex">\(W = P\)</span>(selecting an inlier-point out of the dataset)</li>
+</ul>
+<div class="admonition info">
+<p class="admonition-title">Assumption</p>
+<p>The 2 points necessary to estimation a line are selected independently</p>
+<ul>
+<li><span class="arithmatex">\(w^2 = P\)</span>(both selected points are inliers)</li>
+<li><span class="arithmatex">\(1-w^2 = P\)</span>(at least one of these points is an outlier)</li>
+</ul>
+</div>
+<p>Let <span class="arithmatex">\(k\)</span> be the number of RANSAC iterations executed so far.</p>
+<ul>
+<li><span class="arithmatex">\((1-w^2)^k = P\)</span>(RANSAC never selected two points that are both inliers)</li>
+</ul>
+<p>Let <span class="arithmatex">\(p = P\)</span>(probability of success)</p>
+<ul>
+<li><span class="arithmatex">\(1-p = (1-w^2)^k\)</span></li>
+</ul>
+<p>Therefore the number of required iterations <span class="arithmatex">\(k\)</span> can be calculated as follows:</p>
+<div class="arithmatex">\[
+k = \frac{\log(1-p)}{\log(1-w^2)}
+\]</div>
+<p>By knowing the fraction of inliers <span class="arithmatex">\(w\)</span>, after <span class="arithmatex">\(k\)</span> RANSAC iterations we will have a probability <span class="arithmatex">\(p\)</span> of finding a set of points free of outliers.</p>
+<div class="admonition example">
+<p class="admonition-title">Example</p>
+<p>If we want a probability of success <span class="arithmatex">\(p=99\%\)</span> and we know that <span class="arithmatex">\(w = 50\%\)</span>, then <span class="arithmatex">\(k=16\)</span> iterations.</p>
+</div>
+<p>From the example above, we can see that this is far fewer than trying out all possible combinations.</p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>The number of points does not influence the minimum number of iterations (<span class="arithmatex">\(k\)</span>), only <span class="arithmatex">\(w\)</span> does!</p>
+</div>
+<h3 id="ransac-applied-to-general-model-fitting">RANSAC applied to General Model Fitting</h3>
+<ol>
+<li><strong>Initial</strong> - Let <span class="arithmatex">\(A\)</span> be a set of <span class="arithmatex">\(N\)</span> points</li>
+<li>
+<p>Repeat until maximum number of iterations <span class="arithmatex">\(k\)</span> reached:</p>
+<ol>
+<li>Randomly select a sample of <span class="arithmatex">\(s\)</span> points from <span class="arithmatex">\(A\)</span></li>
+<li><strong>Fit a model</strong> from the <span class="arithmatex">\(s\)</span> points</li>
+<li>Compute the <strong>distances</strong> of all other points <strong>from this model</strong></li>
+<li>Construct the inlier set (i.e. count the number of points whose distance <span class="arithmatex">\(&lt;d\)</span>)</li>
+<li>Store these inliers</li>
+</ol>
+</li>
+<li>
+<p>The set with the maximum number of inliers is chosen as a solution to the problem</p>
+</li>
+</ol>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>The formula for calculating the number of iterations is commonly written as a function of the <strong>fraction of outliers <span class="arithmatex">\(\epsilon\)</span></strong></p>
+<div class="arithmatex">\[
+k = \frac{\log(1-p)}{\log(1-(1-\epsilon)^s)}
+\]</div>
+</div>
+<h3 id="the-three-key-ingredients-of-ransac">The Three Key Ingredients of RANSAC</h3>
+<p>In order to implement RANSAC for Structure From Motion (SFM), we need three key ingredients:</p>
+<ol>
+<li>
+<p><strong>What’s the model</strong> in SFM?</p>
+<ul>
+<li>The <strong>essential matrix</strong> (for calibrated cameras) or the <strong>fundamental matrix</strong> (for uncalibrated cameras)</li>
+<li>Alternatively, <span class="arithmatex">\(R\)</span> and <span class="arithmatex">\(T\)</span></li>
+</ul>
+</li>
+<li>
+<p>What’s the <strong>minimum number of points</strong> to estimate the model?</p>
+<ul>
+<li>We know that 5 points is the theoretical minimum number of points for calibrated cameras</li>
+<li>However, if we use the 8-point algorithm, then 8 is the minimum (for both calibrated or uncalibrated cameras)</li>
+</ul>
+</li>
+<li>
+<p>How do we compute the <strong>distance</strong> of a point from the model?</p>
+<ul>
+<li>Algebraic error</li>
+<li>Directional error</li>
+<li>Epipolar line distance</li>
+<li>Reprojection error</li>
+</ul>
+</li>
+</ol>
+<h3 id="applying-8-point-ransac-to-sfm-problem">Applying 8-Point RANSAC to SfM Problem</h3>
+<p>Let’s consider the following image pair and its image correspondences (e.g., Harris, SIFT, etc.), denoted by arrows:</p>
+<p><img alt="p578" src="../../img/p578w.svg#only-light" />
+<img alt="p578" src="../../img/p578b.svg#only-dark" /></p>
+<p>For convenience, we overlay the features of the second image on the first image and use arrows to denote the <em>motion vectors</em> of the features:</p>
+<p><img alt="p579" src="../../img/p579.svg" /></p>
+<ol>
+<li>
+<p>Randomly select 8 point correspondences:
+    <img alt="p580" src="../../img/p580.svg" /></p>
+</li>
+<li>
+<p>Fit the model to all other points and count the inliers:
+    <img alt="p580" src="../../img/p580.svg" /></p>
+</li>
+<li>
+<p>Repeat steps 1-2 <span class="arithmatex">\(k\)</span> times, where <span class="arithmatex">\(k\)</span> is:</p>
+<div class="arithmatex">\[
+k = \frac{\log(1-p)}{\log(1-(1-\epsilon)^8)}
+\]</div>
+</li>
+</ol>
+<h4 id="ransac-iterations-k-vs-s">RANSAC Iterations <span class="arithmatex">\(k\)</span> Vs. <span class="arithmatex">\(s\)</span></h4>
+<p><span class="arithmatex">\(k\)</span> is exponential in the number of points <span class="arithmatex">\(s\)</span> necessary to estimate the model:</p>
+<ul>
+<li>
+<p>8-point RANSAC</p>
+<ul>
+<li>Assuming:<ul>
+<li><span class="arithmatex">\(p = 99\%\)</span></li>
+<li><span class="arithmatex">\(\epsilon = 50\%\)</span> (fraction of outliers)</li>
+<li><span class="arithmatex">\(s = 8\)</span> points (8-point algorithm)</li>
+</ul>
+</li>
+</ul>
+<p><span class="arithmatex">\(k = 1177\)</span> iterations</p>
+</li>
+<li>
+<p>5-point RANSAC</p>
+<ul>
+<li>Assuming:<ul>
+<li><span class="arithmatex">\(p = 99\%\)</span></li>
+<li><span class="arithmatex">\(\epsilon = 50\%\)</span> (fraction of outliers)</li>
+<li><span class="arithmatex">\(s = 5\)</span> points (5-point algorithm)</li>
+</ul>
+</li>
+</ul>
+<p><span class="arithmatex">\(k = 145\)</span> iterations</p>
+</li>
+<li>
+<p>2-point RANSAC (e.g., line fitting)</p>
+<ul>
+<li>Assuming:<ul>
+<li><span class="arithmatex">\(p = 99\%\)</span></li>
+<li><span class="arithmatex">\(\epsilon = 50\%\)</span> (fraction of outliers)</li>
+<li><span class="arithmatex">\(s = 2\)</span> points</li>
+</ul>
+</li>
+</ul>
+<p><span class="arithmatex">\(k = 16\)</span> iterations</p>
+</li>
+</ul>
+<p>As observed, <span class="arithmatex">\(k\)</span> is exponential in the number of points <span class="arithmatex">\(s\)</span> necessary to estimate the model.</p>
+<ul>
+<li>The 8-point algorithm is extremely simple and was very successful; however, it requires more than 1177 iterations</li>
+<li>Because of this, there has been a large interest by the research community in using smaller motion parameterizations (i.e., smaller <span class="arithmatex">\(s\)</span>)</li>
+<li>The first efficient solution to the minimal-case solution (5-point algorithm) took almost a century (Kruppa 1913 → Nister 2004)</li>
+<li>The 5-point RANSAC (Nister 2004) only requires 145 iterations; however:<ul>
+<li>The 5-point algorithm can return up to 10 solutions of <span class="arithmatex">\(E\)</span> (worst case scenario)</li>
+<li>The 8-point algorithm only returns a unique solution of <span class="arithmatex">\(E\)</span></li>
+</ul>
+</li>
+</ul>
+<div class="admonition question">
+<p class="admonition-title">Is it possible to use less than 5 points for RANSAC?</p>
+<p>Yes, if you use motion constraints!</p>
+</div>
+<h3 id="planar-motion-constraint">Planar Motion Constraint</h3>
+<p>Planar motion is described by three parameters: <span class="arithmatex">\(\theta\)</span>, <span class="arithmatex">\(\phi\)</span>, <span class="arithmatex">\(\rho\)</span>:</p>
+<div class="arithmatex">\[
+R = \begin{bmatrix}
+\cos\theta &amp; -\sin\theta &amp; 0 \\
+\sin\theta &amp; \cos\theta &amp; 0 \\
+0 &amp; 0 &amp; 1
+\end{bmatrix} \qquad T = \begin{bmatrix}
+\rho\cos\phi \\
+\rho\sin\phi \\
+0
+\end{bmatrix}
+\]</div>
+<p>Let’s compute the epipolar geometry:</p>
+<ul>
+<li>Essential matrix: <span class="arithmatex">\(E = [T_\times]R\)</span></li>
+<li>Epipolar constraint: <span class="arithmatex">\(\overline{p}_2^T E \overline{p}_1 = 0\)</span></li>
+</ul>
+<p>Observe that <span class="arithmatex">\(E\)</span> has 2 DoF (<span class="arithmatex">\(\theta\)</span>, <span class="arithmatex">\(\phi\)</span>, because <span class="arithmatex">\(\rho\)</span> is the scale factor); thus, <strong>2 correspondences are sufficient</strong> to estimate <span class="arithmatex">\(\theta\)</span> and <span class="arithmatex">\(\phi\)</span><sup id="fnref:4"><a class="footnote-ref" href="#fn:4">4</a></sup>.</p>
+<div class="arithmatex">\[
+E = [T_\times]R = \begin{bmatrix}
+0 &amp; 0 &amp; \rho\sin\phi \\
+0 &amp; 0 &amp; -\rho\cos\phi \\
+-\rho\sin(\phi-\theta) &amp; \rho\cos(\phi-\theta) &amp; 0
+\end{bmatrix}
+\]</div>
+<div class="admonition question">
+<p class="admonition-title">Can we use less than 2 point correspondences?</p>
+<p>Yes, if we exploit wheeled vehicles with <strong>non-holonomic constraints</strong>.</p>
+</div>
+<p>Wheeled vehicles, like cars, follow locally-planar circular motion about the Instantaneous Center of Rotation (ICR).</p>
+<p>Therefore <span class="arithmatex">\(\phi = \theta/2\)</span> → giving only 1 DoF (<span class="arithmatex">\(\theta\)</span>). Thus, only 1 point correspondence is sufficient<sup id="fnref:5"><a class="footnote-ref" href="#fn:5">5</a></sup>.</p>
+<p>In this case, the essential matrix is therefore:</p>
+<div class="arithmatex">\[
+E = [T_\times]R = \begin{bmatrix}
+0 &amp; 0 &amp; \rho\sin\frac{\theta}{2} \\
+0 &amp; 0 &amp; \rho\cos\frac{\theta}{2} \\
+\rho\sin\frac{\theta}{2} &amp; -\rho\cos\frac{\theta}{2} &amp; 0
+\end{bmatrix}
+\]</div>
+<p>and the epipolar constraint gives us the following equation:</p>
+<div class="arithmatex">\[
+\theta = -2\tan^{-1}\left(\frac{v_2 - v_1}{u_2 + u_1} \right)
+\]</div>
+<p>As only one degree of freedom needs to be estimated, we only need 1 iteration to find the inliers.</p>
+<h2 id="state-of-the-art">State of the Art</h2>
+<h3 id="differentiable-ransac">Differentiable RANSAC</h3>
+<p>Random Sample Consensus (RANSAC)<sup id="fnref:7"><a class="footnote-ref" href="#fn:7">6</a></sup> is not differentiable since it relies on selecting a hypothesis based on maximizing the number of inliers (i.e., <span class="arithmatex">\(\arg\max\)</span>).</p>
+<ul>
+<li>DSAC shows how sample consensus can be used in a differentiable way</li>
+<li>This enables the use of sample consensus in a variety of learning tasks.</li>
+</ul>
+<h3 id="deep-fundamental-matrix-estimation">Deep Fundamental Matrix Estimation</h3>
+<p>Deep Fundamental Matrix Estimation<sup id="fnref:8"><a class="footnote-ref" href="#fn:8">7</a></sup> takes in two sets of noisy local features (coordinates + descriptors) contaminated by outliers and outputs the fundamental matrix.</p>
+<p><strong>Idea</strong>: Solve a weighted homogeneous least-squares problem, where robust weights are estimated using deep networks.
+<strong>Robust</strong>: Handles extreme wide-baseline image pairs</p>
+<h3 id="superglue">SuperGlue</h3>
+<p>SuperGlue<sup id="fnref:9"><a class="footnote-ref" href="#fn:9">8</a></sup> is a learning feature matching with graph neural networks.</p>
+<ul>
+<li><strong>Input</strong>: Two sets of noisy local features (coordinates + descriptors) contaminated by outliers.</li>
+<li><strong>Output</strong>: Strong &amp; outlier-free matches</li>
+<li><strong>Combines deep learning with classical optimization</strong> (Graph Neural Networks, Attention, Optimal Transport)</li>
+<li><strong>Robust</strong>: Handles extreme wide-baseline image pairs</li>
+</ul>
+<div class="footnote">
+<hr />
+<ol>
+<li id="fn:1">
+<p><em>Yang, Antonante, Tzoumas, Carlone, Graduated Non-Convexity for Robust Spatial Perception: From Non-Minimal Solvers to Global Outlier Rejection</em> - International Conference on Robotics and Automation (ICRA), 2020 - <a href="https://arxiv.org/pdf/1909.08605.pdf">PDF</a>&#160;<a class="footnote-backref" href="#fnref:1" title="Jump back to footnote 1 in the text">&#8617;</a><a class="footnote-backref" href="#fnref2:1" title="Jump back to footnote 1 in the text">&#8617;</a></p>
+</li>
+<li id="fn:2">
+<p><em>Blake, Zisserman, Visual Reconstruction</em> - MIT Press, Cambridge, Massachusetts, 1987&#160;<a class="footnote-backref" href="#fnref:2" title="Jump back to footnote 2 in the text">&#8617;</a></p>
+</li>
+<li id="fn:3">
+<p><em>M. A.Fischler and R. C.Bolles. Random sample consensus: A paradigm for model fitting with applications to image analysis and automated cartography</em> - Graphics and Image Processing, 1981 - <a href="https://apps.dtic.mil/dtic/tr/fulltext/u2/a460585.pdf">PDF</a>&#160;<a class="footnote-backref" href="#fnref:3" title="Jump back to footnote 3 in the text">&#8617;</a></p>
+</li>
+<li id="fn:4">
+<p><em>"2-Point RANSAC", Ortin &amp; Montiel, Indoor Robot Motion Based on Monocular Images</em> - Robotica, 2001 - <a href="http://webdiis.unizar.es/%7Ejosemari/ortin_robotica_2001.pdf">PDF</a>&#160;<a class="footnote-backref" href="#fnref:4" title="Jump back to footnote 4 in the text">&#8617;</a></p>
+</li>
+<li id="fn:5">
+<p><em>Scaramuzza, 1-Point-RANSAC Structure from Motion for Vehicle-Mounted Cameras by Exploiting Non-Holonomic Constraints</em> - International Journal of Computer Vision, 2011 - <a href="https://rpg.ifi.uzh.ch/docs/IJCV11_scaramuzza.pdf">PDF</a>&#160;<a class="footnote-backref" href="#fnref:5" title="Jump back to footnote 5 in the text">&#8617;</a></p>
+</li>
+<li id="fn:7">
+<p><em>E. Brachmann et al., DSAC - Differentiable RANSAC for Camera Localization</em> - International Conference on Computer Vision and Pattern Recognition (CVPR), 2017 - <a href="https://arxiv.org/abs/1611.05705">PDF</a>, <a href="https://www.youtube.com/watch?v=YWSGq7CUSRA">Video</a>&#160;<a class="footnote-backref" href="#fnref:7" title="Jump back to footnote 6 in the text">&#8617;</a></p>
+</li>
+<li id="fn:8">
+<p><em>Ranftl, Koltun, Deep Fundamental Matrix Estimation</em> - European Conference on Computer Vision (ECCV), 2018 - <a href="http://vladlen.info/papers/deep-fundamental.pdf">PDF</a>&#160;<a class="footnote-backref" href="#fnref:8" title="Jump back to footnote 7 in the text">&#8617;</a></p>
+</li>
+<li id="fn:9">
+<p><em>Sarlin, DeTone, Malisiewicz, Rabinovich, SuperGlue: Learning Feature Matching with Graph Neural Networks</em> - International Conference on Computer Vision and Pattern Recognition (CVPR), 2020 - <a href="https://arxiv.org/pdf/1911.11763.pdf">PDF</a>, <a href="https://github.com/magicleap/SuperGluePretrainedNetwork">Code</a>&#160;<a class="footnote-backref" href="#fnref:9" title="Jump back to footnote 8 in the text">&#8617;</a></p>
+</li>
+</ol>
+</div>
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var tab,labels=set.querySelector(".tabbed-labels");for(tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": ["search.suggest", "content.tabs.link"], "search": "../../assets/javascripts/workers/search.208ed371.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.b4d07000.min.js"></script>
+      
+        <script src="../../javascripts/mathjax.js"></script>
+      
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>

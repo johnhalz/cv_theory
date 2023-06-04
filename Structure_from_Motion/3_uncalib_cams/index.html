@@ -1,0 +1,975 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../2_calib_cams/">
+      
+      
+        <link rel="next" href="../4_robust_sfm/">
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.4.3, mkdocs-material-9.1.15">
+    
+    
+      
+        <title>SfM with Uncalibrated Cameras - Computer Vision Theory</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.26e3688c.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ecc896b0.min.css">
+      
+      
+
+    
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&"object"==typeof palette.color)for(var key of Object.keys(palette.color))document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#sfm-with-uncalibrated-cameras" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Computer Vision Theory" class="md-header__button md-logo" aria-label="Computer Vision Theory" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Computer Vision Theory
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              SfM with Uncalibrated Cameras
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+          
+            
+            
+            
+            <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+            
+              <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_2" hidden>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 6H7c-3.31 0-6 2.69-6 6s2.69 6 6 6h10c3.31 0 6-2.69 6-6s-2.69-6-6-6zm0 10H7c-2.21 0-4-1.79-4-4s1.79-4 4-4h10c2.21 0 4 1.79 4 4s-1.79 4-4 4zM7 9c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg>
+              </label>
+            
+          
+            
+            
+            
+            <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_2">
+            
+              <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 7H7a5 5 0 0 0-5 5 5 5 0 0 0 5 5h10a5 5 0 0 0 5-5 5 5 0 0 0-5-5m0 8a3 3 0 0 1-3-3 3 3 0 0 1 3-3 3 3 0 0 1 3 3 3 3 0 0 1-3 3Z"/></svg>
+              </label>
+            
+          
+        </form>
+      
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Computer Vision Theory" class="md-nav__button md-logo" aria-label="Computer Vision Theory" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    Computer Vision Theory
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        Welcome Page
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../introduction/" class="md-nav__link">
+        Introduction
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+          Structure from Motion
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          Structure from Motion
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../1_sfm/" class="md-nav__link">
+        Structure from Motion (SfM)
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../2_calib_cams/" class="md-nav__link">
+        SfM with Calibrated Cameras
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          SfM with Uncalibrated Cameras
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        SfM with Uncalibrated Cameras
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#the-fundamental-matrix" class="md-nav__link">
+    The Fundamental Matrix
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-8-point-algorithm-for-the-fundamental-matrix" class="md-nav__link">
+    The 8-Point Algorithm for the Fundamental Matrix
+  </a>
+  
+    <nav class="md-nav" aria-label="The 8-Point Algorithm for the Fundamental Matrix">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#problem-with-8-point-algorithm" class="md-nav__link">
+    Problem with 8-Point Algorithm
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#normalized-8-point-algorithm" class="md-nav__link">
+    Normalized 8-Point Algorithm
+  </a>
+  
+    <nav class="md-nav" aria-label="Normalized 8-Point Algorithm">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#rescale-shift-method" class="md-nav__link">
+    Rescale &amp; Shift Method
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#zero-centroid-method" class="md-nav__link">
+    Zero-Centroid Method
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#comparison-between-normalized-and-non-normalized-algorithm" class="md-nav__link">
+    Comparison between Normalized and Non-Normalized Algorithm
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#error-measures" class="md-nav__link">
+    Error Measures
+  </a>
+  
+    <nav class="md-nav" aria-label="Error Measures">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#algebraic-error" class="md-nav__link">
+    Algebraic Error
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#directional-error" class="md-nav__link">
+    Directional Error
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#epipolar-line-distance" class="md-nav__link">
+    Epipolar Line Distance
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#reprojection-error" class="md-nav__link">
+    Reprojection Error
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../4_robust_sfm/" class="md-nav__link">
+        Robust Structure from Motion
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+          Visual Odometry
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_4">
+          <span class="md-nav__icon md-icon"></span>
+          Visual Odometry
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Visual_Odometry/1_vo_overview/" class="md-nav__link">
+        Visual Odometry Overview
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Visual_Odometry/2_image_formation/" class="md-nav__link">
+        Image Formation
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#the-fundamental-matrix" class="md-nav__link">
+    The Fundamental Matrix
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-8-point-algorithm-for-the-fundamental-matrix" class="md-nav__link">
+    The 8-Point Algorithm for the Fundamental Matrix
+  </a>
+  
+    <nav class="md-nav" aria-label="The 8-Point Algorithm for the Fundamental Matrix">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#problem-with-8-point-algorithm" class="md-nav__link">
+    Problem with 8-Point Algorithm
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#normalized-8-point-algorithm" class="md-nav__link">
+    Normalized 8-Point Algorithm
+  </a>
+  
+    <nav class="md-nav" aria-label="Normalized 8-Point Algorithm">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#rescale-shift-method" class="md-nav__link">
+    Rescale &amp; Shift Method
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#zero-centroid-method" class="md-nav__link">
+    Zero-Centroid Method
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#comparison-between-normalized-and-non-normalized-algorithm" class="md-nav__link">
+    Comparison between Normalized and Non-Normalized Algorithm
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#error-measures" class="md-nav__link">
+    Error Measures
+  </a>
+  
+    <nav class="md-nav" aria-label="Error Measures">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#algebraic-error" class="md-nav__link">
+    Algebraic Error
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#directional-error" class="md-nav__link">
+    Directional Error
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#epipolar-line-distance" class="md-nav__link">
+    Epipolar Line Distance
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#reprojection-error" class="md-nav__link">
+    Reprojection Error
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+<h1 id="sfm-with-uncalibrated-cameras">SfM with Uncalibrated Cameras</h1>
+<p>While can and is used with known intrinsic camera parameters, it's big advantage over other methods is that it can be used with uncalibrated cameras by using the <strong>fundamental matrix</strong> instead of the essential matrix.</p>
+<h2 id="the-fundamental-matrix">The Fundamental Matrix</h2>
+<p>So far, we have assumed to know the camera intrinsic parameters and we have used normalized image coordinates to get the epipolar constraint for calibrated cameras:</p>
+<div class="arithmatex">\[
+\begin{bmatrix}
+\overline{u}^i_1 \\
+\overline{v}^i_1 \\
+1
+\end{bmatrix} = K_1^{-1} \begin{bmatrix}
+u^i_1 \\
+v^i_1 \\
+1
+\end{bmatrix}
+\qquad
+\begin{bmatrix}
+\overline{u}^i_2 \\
+\overline{v}^i_2 \\
+1
+\end{bmatrix} = K_2^{-1} \begin{bmatrix}
+u^i_2 \\
+v^i_2 \\
+1
+\end{bmatrix}
+\]</div>
+<div class="arithmatex">\[
+\overline{p}_2^T E \overline{p}_1 = 0
+\]</div>
+<div class="arithmatex">\[
+\begin{bmatrix}
+\overline{u}^i_2 \\
+\overline{v}^i_2 \\
+1
+\end{bmatrix}^T E \begin{bmatrix}
+\overline{u}^i_1 \\
+\overline{v}^i_1 \\
+1
+\end{bmatrix} = 0
+\]</div>
+<p>We can modify the last equation to create the fundamental matrix <span class="arithmatex">\(F\)</span>:</p>
+<div class="arithmatex">\[
+\begin{bmatrix}
+\overline{u}^i_2 \\
+\overline{v}^i_2 \\
+1
+\end{bmatrix}^T \underbrace{K_2^{-T} E K_1^{-1}}_{=F} \begin{bmatrix}
+\overline{u}^i_1 \\
+\overline{v}^i_1 \\
+1
+\end{bmatrix} = 0
+\]</div>
+<div class="arithmatex">\[
+F = K_2^{-T} E K_1^{-1}
+\]</div>
+<h2 id="the-8-point-algorithm-for-the-fundamental-matrix">The 8-Point Algorithm for the Fundamental Matrix</h2>
+<p>The same 8-point algorithm to compute the essential matrix from a set of normalized image coordinates can also be used to determine the fundamental matrix:</p>
+<div class="arithmatex">\[
+\begin{bmatrix}
+\overline{u}^i_2 \\
+\overline{v}^i_2 \\
+1
+\end{bmatrix}^T F \begin{bmatrix}
+\overline{u}^i_1 \\
+\overline{v}^i_1 \\
+1
+\end{bmatrix} = 0
+\]</div>
+<p>However, now the key advantage is that <strong>we work directly in pixel coordinates</strong>.</p>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>The 8 point algorithm works for both calibrated and uncalibrated cameras, however the 5 point algorithm only works for calibrated cameras.</p>
+</div>
+<p>Similarly to solving the problem with the essential matrix we need to use SVD to solve the following:</p>
+<div class="arithmatex">\[
+\begin{bmatrix}
+\bar{u}_2^1 \bar{u}_1^1 &amp; \bar{u}_2^1 \bar{v}_1^1 &amp; \bar{u}_2^1 &amp; \bar{v}_2^1 \bar{u}_1^1 &amp; \bar{v}_2^1 \bar{v}_1^1 &amp; \bar{v}_2^1 &amp; \bar{u}_1^1 &amp; \bar{v}_1^1 &amp; 1 \\\\
+\bar{u}_2^2 \bar{u}_1^2 &amp; \bar{u}_2^2 \bar{v}_1^2 &amp; \bar{u}_2^2 &amp; \bar{v}_2^2 \bar{u}_1^2 &amp; \bar{v}_2^2 \bar{v}_1^2 &amp; \bar{v}_2^2 &amp; \bar{u}_1^2 &amp; \bar{v}_1^2 &amp; 1 \\\\
+\vdots &amp; \vdots &amp; \vdots &amp; \vdots &amp; \vdots &amp; \vdots &amp; \vdots &amp; \vdots &amp; \vdots \\\\
+\bar{u}_2^n \bar{u}_1^n &amp; \bar{u}_2^n \bar{v}_1^n &amp; \bar{u}_2^n &amp; \bar{v}_2^n \bar{u}_1^n &amp; \bar{v}_2^n \bar{v}_1^n &amp; \bar{v}_2^n &amp; \bar{u}_1^n &amp; \bar{v}_1^n &amp; 1
+\end{bmatrix}
+\begin{bmatrix}
+f_{11} \\
+f_{12} \\
+f_{13} \\
+f_{21} \\
+f_{22} \\
+f_{23} \\
+f_{31} \\
+f_{32} \\
+f_{33}
+\end{bmatrix} = 0
+\]</div>
+<h3 id="problem-with-8-point-algorithm">Problem with 8-Point Algorithm</h3>
+<p>When using SVD to solve the equation above, we have <strong>poor numerical conditioning</strong>, making our solution <strong>very sensitive to noise</strong>. This can fixed by rescaling the input data, as shown in the example below:</p>
+<div class="admonition example">
+<p class="admonition-title">Example</p>
+<p>It can be common to have the input data as shown below. The differences in magnitude between the columns is readily visible in the matrix below:</p>
+<div class="arithmatex">\[
+\begin{bmatrix}
+250906.36 &amp; 183269.57 &amp; 921.81 &amp; 200931.1 &amp; 146766.13 &amp; 738.21 &amp; 272.19 &amp; 198.81 &amp; 1.00 \\
+2692.28 &amp; 131633.03 &amp; 176.27 &amp; 6196.73 &amp; 302975.59 &amp; 405.71 &amp; 15.27 &amp; 746.79 &amp; 1.00 \\
+416374.23 &amp; 871684.3 &amp; 935.47 &amp; 408110.89 &amp; 854384.92 &amp; 916.9 &amp; 445.1 &amp; 931.81 &amp; 1.00 \\
+191183.6 &amp; 171759.4 &amp; 410.27 &amp; 416435.62 &amp; 374125.9 &amp; 893.65 &amp; 465.99 &amp; 418.65 &amp; 1.00 \\
+48988.86 &amp; 30401.76 &amp; 57.89 &amp; 298604.57 &amp; 185309.58 &amp; 352.87 &amp; 846.22 &amp; 525.15 &amp; 1.00 \\
+164786.04 &amp; 546559.67 &amp; 813.17 &amp; 1998.37 &amp; 6628.15 &amp; 9.86 &amp; 202.65 &amp; 672.14 &amp; 1.00 \\
+116407.01 &amp; 2727.75 &amp; 138.89 &amp; 169941.27 &amp; 3982.21 &amp; 202.77 &amp; 838.12 &amp; 19.64 &amp; 1.00 \\
+135384.58 &amp; 75411.13 &amp; 198.72 &amp; 411350.03 &amp; 229127.78 &amp; 603.79 &amp; 681.28 &amp; 379.48 &amp; 1.00
+\end{bmatrix}
+\begin{bmatrix}
+f_{11} \\
+f_{12} \\
+f_{13} \\
+f_{21} \\
+f_{22} \\
+f_{23} \\
+f_{31} \\
+f_{32} \\
+f_{33}
+\end{bmatrix} = 0
+\]</div>
+<p>Such differences in magnitude means that solving by least-squares (SVD) will yield poor results.</p>
+</div>
+<h3 id="normalized-8-point-algorithm">Normalized 8-Point Algorithm</h3>
+<p>This can be fixed using a normalized 8-point algorithm [Hartley, 1997]<sup id="fnref:1"><a class="footnote-ref" href="#fn:1">1</a></sup>, which estimates the Fundamental matrix on a set of <strong>normalized correspondences</strong> (with better numerical properties) and <strong>then un-normalizes the result</strong> to obtain the fundamental matrix for the <strong>given (un-normalized) correspondences</strong>.</p>
+<p><strong>Idea:</strong> Transform image coordinates so that they are in the range <span class="arithmatex">\(\sim[-1, 1] \times [-1, 1]\)</span>.</p>
+<h4 id="rescale-shift-method">Rescale &amp; Shift Method</h4>
+<p>The most common method is to apply the rescale and shift method (shown below).</p>
+<p><img alt="p536" src="../../img/p536w.svg#only-light" />
+<img alt="p536" src="../../img/p536b.svg#only-dark" /></p>
+<h4 id="zero-centroid-method">Zero-Centroid Method</h4>
+<p>In the original 1997 paper<sup id="fnref2:1"><a class="footnote-ref" href="#fn:1">1</a></sup>, Hartley proposed to rescale the two point sets such that the centroid of each set is 0 and the mean standard deviation <span class="arithmatex">\(\sqrt{2}\)</span> (equivalent to having the points distributed around a circled passing through the four corners of the <span class="arithmatex">\([-1, 1]\times[-1, 1]\)</span> square).</p>
+<p>This can done for every point as follows:</p>
+<div class="arithmatex">\[
+\hat{p}^i = \frac{\sqrt{2}}{\sigma}(p^i - \mu)
+\]</div>
+<p>where <span class="arithmatex">\(\mu = (\mu_x, \mu_y) = \frac{1}{N}\sum_{i=1}^{n}p^i\)</span> is the centroid and <span class="arithmatex">\(\sigma = \frac{1}{N}\sum_{i=1}^{n}\|p^i - \mu\|^2\)</span> is the mean standard deviation of the point set.</p>
+<p>This transformation can be expressed in matrix form using homogeneous coordinates:</p>
+<div class="arithmatex">\[
+\hat{p}^i = \begin{bmatrix}
+\frac{\sqrt{2}}{\sigma} &amp; 0 &amp; -\frac{\sqrt{2}}{\sigma}\mu_x \\
+0 &amp; \frac{\sqrt{2}}{\sigma} &amp; -\frac{\sqrt{2}}{\sigma}\mu_y \\
+0 &amp; 0 &amp; 1
+\end{bmatrix}
+\]</div>
+<p>The normalized 8-point algorithm can therefore be summarized in three steps:</p>
+<ol>
+<li><strong>Normalize</strong> the point correspondences: <span class="arithmatex">\(\hat{p}_1 = B_1 p_1\)</span>, <span class="arithmatex">\(\hat{p}_2 = B_2 p_2\)</span></li>
+<li>Estimate <strong>normalized</strong> <span class="arithmatex">\(\hat{F}\)</span> with 8-point algorithm using normalized coordinates <span class="arithmatex">\(\hat{p}_1\)</span>, <span class="arithmatex">\(\hat{p}_2\)</span></li>
+<li>Compute <strong>un-normalized</strong> <span class="arithmatex">\(F\)</span> from <span class="arithmatex">\(\hat{F}\)</span>.</li>
+</ol>
+<div class="arithmatex">\[
+\hat{p}_2^T \hat{F} \hat{p}_1 = 0 \qquad \leftrightarrow \qquad p_2^T b_2^T \hat{F} B_1 p_1 = 0
+\]</div>
+<p><strong>Can <span class="arithmatex">\(R\)</span>, <span class="arithmatex">\(T\)</span>, <span class="arithmatex">\(K_1\)</span> and <span class="arithmatex">\(K_2\)</span> be extracted from <span class="arithmatex">\(F\)</span>?</strong></p>
+<ul>
+<li>In general, <strong>no</strong>: infinite solutions exist.</li>
+<li>However, if the coordinates of the principal points of each camera are known and the two cameras have the same focal length <span class="arithmatex">\(f\)</span> in pixels, then <span class="arithmatex">\(R\)</span>, <span class="arithmatex">\(T\)</span> and <span class="arithmatex">\(f\)</span> can determined uniquely.</li>
+</ul>
+<h3 id="comparison-between-normalized-and-non-normalized-algorithm">Comparison between Normalized and Non-Normalized Algorithm</h3>
+<p><img alt="p540" src="../../img/p540.png" /></p>
+<table>
+<thead>
+<tr>
+<th align="center"></th>
+<th align="center">8-Point</th>
+<th align="center">Normalized 8-Point</th>
+<th align="center">Non-linear Refinement</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center">Avg. Ep. Line Distance</td>
+<td align="center">2.33 px</td>
+<td align="center">0.92 px</td>
+<td align="center">0.86 px</td>
+</tr>
+</tbody>
+</table>
+<h2 id="error-measures">Error Measures</h2>
+<p>The quality of the estimated Essential or Fundamental matrix can be measured using different error metrics:</p>
+<ul>
+<li>Algebraic error</li>
+<li>Directional Error</li>
+<li>Epipolar Line Distance</li>
+<li>Reprojection Error</li>
+</ul>
+<p><img alt="p541" src="../../img/p541w.svg#only-light" />
+<img alt="p541" src="../../img/p541b.svg#only-dark" /></p>
+<div class="admonition question">
+<p class="admonition-title">When in the error 0?</p>
+<ul>
+<li>These errors will be exactly 0 only if <span class="arithmatex">\(E\)</span> (or <span class="arithmatex">\(F\)</span>) is computed from just 8 points (because in this case a non-overdetermined solution exists).</li>
+<li>For more than 8 points, it will only be 0 if there is no noise or outliers in the data (if there is image noise or outliers then it the system becomes overdetermined)</li>
+</ul>
+</div>
+<h3 id="algebraic-error">Algebraic Error</h3>
+<p>This method follows directly from the 8-point algorithm, which seeks to minimize the algebraic error:</p>
+<div class="arithmatex">\[
+err = \|QE\|^2 = \sum_{i=1}^N\left( {\overline{p}^i_2}^T E \overline{p}^i_1 \right)^2
+\]</div>
+<p>From the proof of the epipolar constraint and using the definition of dot product, it can be observed that:</p>
+<div class="arithmatex">\[
+\| \overline{p}_2^T E \overline{p}_1 \| = \| \overline{p}_2^T \cdot (E \overline{p}_1) \| = \| \overline{p}_2 \| \| E \overline{p}_1 \| \cos(\theta) = \| \overline{p}_2 \| \| [T_\times] R \overline{p}_1 \| \cos(\theta)
+\]</div>
+<p>We can see that this product depends on the angle <span class="arithmatex">\(\theta\)</span> between <span class="arithmatex">\(\overline{p}_2\)</span> and the normal <span class="arithmatex">\(n = E p_1\)</span> to epipolar plane. It is non-zero when <span class="arithmatex">\(\overline{p}_1\)</span>, <span class="arithmatex">\(\overline{p}_2\)</span> and <span class="arithmatex">\(T\)</span> are not coplanar.</p>
+<div class="admonition question">
+<p class="admonition-title">What is the drawback of this error measure?</p>
+<p>This method depends on the lengths of <span class="arithmatex">\(\overline{p}_1\)</span> and <span class="arithmatex">\(\overline{p}_2\)</span>, we only care about the angle between <span class="arithmatex">\(n\)</span> and <span class="arithmatex">\(\overline{p}_2\)</span>, and this error metric changes based on the lengths of <span class="arithmatex">\(\overline{p}_1\)</span>, <span class="arithmatex">\(\overline{p}_2\)</span> and the values of <span class="arithmatex">\(E\)</span>.</p>
+</div>
+<h3 id="directional-error">Directional Error</h3>
+<p>This error is defined as the <strong>sum of squared cosines of the angle from the epipolar plane</strong>:</p>
+<div class="arithmatex">\[
+err = \sum_i \left( \cos(\theta_i) \right)^2
+\]</div>
+<p>It is obtained by <strong>normalizing the algebraic error</strong>:</p>
+<div class="arithmatex">\[
+\cos(\theta) = \frac{\overline{p}_2^T E \overline{p}_1}{\|p_2\| \|E p_1\|}
+\]</div>
+<h3 id="epipolar-line-distance">Epipolar Line Distance</h3>
+<p>This method is defined as the <strong>sum of squared epipolar-line-to-point distances</strong>:</p>
+<div class="arithmatex">\[
+err = \sum_{i=1}^N d^2 \left(p_1^i, l_1^i \right) + d^2 \left(p_2^i, l_2^i \right)
+\]</div>
+<p>This method is faster to compute than the reprojection error because it does not require point triangulation.</p>
+<p><img alt="p544" src="../../img/p544w.svg#only-light" />
+<img alt="p544" src="../../img/p544b.svg#only-dark" /></p>
+<h3 id="reprojection-error">Reprojection Error</h3>
+<p>This method is defined as the <strong>sum of squared reprojection errors</strong>:</p>
+<div class="arithmatex">\[
+err = \left\| p_1 - \pi(P, K_1, R, T) \right\|^2 + \left\| p_2 - \pi(P, K_2, R, T) \right\|^2
+\]</div>
+<p>This method is computationally more expensive than the previous three methods because it requires us to first triangulate the 3D points.</p>
+<p>However it is the most popular because of its accuracy. The reason is that the error is computed directly with respect to the raw input data, which are image points.</p>
+<p><img alt="p545" src="../../img/p545w.svg#only-light" />
+<img alt="p545" src="../../img/p545b.svg#only-dark" /></p>
+<div class="footnote">
+<hr />
+<ol>
+<li id="fn:1">
+<p><a href="https://www.cse.unr.edu/~bebis/CS485/Handouts/hartley.pdf"><em>Richard I. Hartley</em>, In Defense of the Eight-Point Algorithm</a>&#160;<a class="footnote-backref" href="#fnref:1" title="Jump back to footnote 1 in the text">&#8617;</a><a class="footnote-backref" href="#fnref2:1" title="Jump back to footnote 1 in the text">&#8617;</a></p>
+</li>
+</ol>
+</div>
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var tab,labels=set.querySelector(".tabbed-labels");for(tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": ["search.suggest", "content.tabs.link"], "search": "../../assets/javascripts/workers/search.208ed371.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.b4d07000.min.js"></script>
+      
+        <script src="../../javascripts/mathjax.js"></script>
+      
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>

@@ -1,0 +1,866 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../1_sfm/">
+      
+      
+        <link rel="next" href="../3_uncalib_cams/">
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.4.3, mkdocs-material-9.1.15">
+    
+    
+      
+        <title>SfM with Calibrated Cameras - Computer Vision Theory</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.26e3688c.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ecc896b0.min.css">
+      
+      
+
+    
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&"object"==typeof palette.color)for(var key of Object.keys(palette.color))document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#sfm-with-calibrated-cameras" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Computer Vision Theory" class="md-header__button md-logo" aria-label="Computer Vision Theory" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Computer Vision Theory
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              SfM with Calibrated Cameras
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+          
+            
+            
+            
+            <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+            
+              <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_2" hidden>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 6H7c-3.31 0-6 2.69-6 6s2.69 6 6 6h10c3.31 0 6-2.69 6-6s-2.69-6-6-6zm0 10H7c-2.21 0-4-1.79-4-4s1.79-4 4-4h10c2.21 0 4 1.79 4 4s-1.79 4-4 4zM7 9c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg>
+              </label>
+            
+          
+            
+            
+            
+            <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_2">
+            
+              <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 7H7a5 5 0 0 0-5 5 5 5 0 0 0 5 5h10a5 5 0 0 0 5-5 5 5 0 0 0-5-5m0 8a3 3 0 0 1-3-3 3 3 0 0 1 3-3 3 3 0 0 1 3 3 3 3 0 0 1-3 3Z"/></svg>
+              </label>
+            
+          
+        </form>
+      
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Computer Vision Theory" class="md-nav__button md-logo" aria-label="Computer Vision Theory" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    Computer Vision Theory
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        Welcome Page
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../introduction/" class="md-nav__link">
+        Introduction
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+          Structure from Motion
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          Structure from Motion
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../1_sfm/" class="md-nav__link">
+        Structure from Motion (SfM)
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          SfM with Calibrated Cameras
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        SfM with Calibrated Cameras
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#scale-ambiguity" class="md-nav__link">
+    Scale Ambiguity
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#knowns-unknowns" class="md-nav__link">
+    Knowns &amp; Unknowns
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#relative-motion-estimation" class="md-nav__link">
+    Relative Motion Estimation
+  </a>
+  
+    <nav class="md-nav" aria-label="Relative Motion Estimation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#the-epipolar-constraint-recap" class="md-nav__link">
+    The Epipolar Constraint (Recap)
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#how-to-compute-the-essential-matrix" class="md-nav__link">
+    How to compute the Essential matrix?
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-8-point-algorithm" class="md-nav__link">
+    The 8-Point Algorithm
+  </a>
+  
+    <nav class="md-nav" aria-label="The 8-Point Algorithm">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#solving-the-8-point-algorithm" class="md-nav__link">
+    Solving the 8-Point Algorithm
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#extract-rotation-and-translation" class="md-nav__link">
+    Extract Rotation and Translation
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../3_uncalib_cams/" class="md-nav__link">
+        SfM with Uncalibrated Cameras
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../4_robust_sfm/" class="md-nav__link">
+        Robust Structure from Motion
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+          Visual Odometry
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_4">
+          <span class="md-nav__icon md-icon"></span>
+          Visual Odometry
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Visual_Odometry/1_vo_overview/" class="md-nav__link">
+        Visual Odometry Overview
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Visual_Odometry/2_image_formation/" class="md-nav__link">
+        Image Formation
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#scale-ambiguity" class="md-nav__link">
+    Scale Ambiguity
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#knowns-unknowns" class="md-nav__link">
+    Knowns &amp; Unknowns
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#relative-motion-estimation" class="md-nav__link">
+    Relative Motion Estimation
+  </a>
+  
+    <nav class="md-nav" aria-label="Relative Motion Estimation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#the-epipolar-constraint-recap" class="md-nav__link">
+    The Epipolar Constraint (Recap)
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#how-to-compute-the-essential-matrix" class="md-nav__link">
+    How to compute the Essential matrix?
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-8-point-algorithm" class="md-nav__link">
+    The 8-Point Algorithm
+  </a>
+  
+    <nav class="md-nav" aria-label="The 8-Point Algorithm">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#solving-the-8-point-algorithm" class="md-nav__link">
+    Solving the 8-Point Algorithm
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#extract-rotation-and-translation" class="md-nav__link">
+    Extract Rotation and Translation
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+<h1 id="sfm-with-calibrated-cameras">SfM with Calibrated Cameras</h1>
+<p>In the case where the cameras used are calibrated, we can use the known <span class="arithmatex">\(K\)</span> matrices to our advantage. For convenience, let's use <em>normalized image coordinates</em>:</p>
+<div class="arithmatex">\[
+\begin{bmatrix}
+    \bar{u} \\
+    \bar{v} \\
+    1
+\end{bmatrix} = K^{-1}
+\begin{bmatrix}
+    u \\
+    v \\
+    1
+\end{bmatrix}
+\]</div>
+<p>With <span class="arithmatex">\(K\)</span> known, we want to find <span class="arithmatex">\(R\)</span>, <span class="arithmatex">\(T\)</span> and <span class="arithmatex">\(P^i\)</span> that satisfy:</p>
+<div class="arithmatex">\[
+\begin{cases} 
+\lambda_1 \begin{bmatrix}
+\bar{u}_1^i \\
+\bar{v}_1^i \\
+1 \end{bmatrix} = \begin{bmatrix} I &amp; 0 \end{bmatrix} \begin{bmatrix}
+X_w^i \\
+Y_w^i \\
+Z_w^i \\
+1
+\end{bmatrix} \\
+\lambda_2 \begin{bmatrix}
+\bar{u}_2^i \\
+\bar{v}_2^i \\
+1 \end{bmatrix} = \begin{bmatrix} R &amp; T \end{bmatrix} \begin{bmatrix}
+X_w^i \\
+Y_w^i \\
+Z_w^i \\
+1
+\end{bmatrix}
+\end{cases}
+\]</div>
+<h2 id="scale-ambiguity">Scale Ambiguity</h2>
+<p>If we rescale the entire scene and camera views by a constant factor (i.e. similarity transformation), the projections (in pixels) of the scene points in both images remain exactly the same.</p>
+<p><img alt="p513" src="../../img/p513w.svg#only-light" />
+<img alt="p513" src="../../img/p513b.svg#only-dark" /></p>
+<p>In Structure from Motion, it is therefore not possible to recover the absolute scale of the scene!
+- We can do this with stereo vision, because we have prior knowledge of the transformation between cameras (the baseline between the values gives a parameter in physical units).</p>
+<p>Thus, only <strong>5 degrees of freedom</strong> are measurable:</p>
+<ul>
+<li>3 parameters to describe the rotation</li>
+<li>2 parameters for the translation up to a scale (we can only compute the direction of translation but not its length)</li>
+</ul>
+<h2 id="knowns-unknowns">Knowns &amp; Unknowns</h2>
+<p>How many knowns and unknowns?</p>
+<ul>
+<li><span class="arithmatex">\(4n\)</span> knowns:<ul>
+<li><span class="arithmatex">\(n\)</span> correspondences, each one <span class="arithmatex">\((u_1^i, v_1^i)\)</span> and <span class="arithmatex">\((u_2^i, v_2^i)\)</span> for <span class="arithmatex">\(i=1\dots n\)</span></li>
+</ul>
+</li>
+<li><span class="arithmatex">\(5+3n\)</span> unknowns:<ul>
+<li>5 for the motion up to a scale (3 for rotation, 2 for translation)</li>
+<li><span class="arithmatex">\(3n\)</span> = number of coordinates of the <span class="arithmatex">\(n\)</span> 3D points</li>
+</ul>
+</li>
+</ul>
+<p>Does a solution exist?</p>
+<ul>
+<li>
+<p>If and only if the number of independent equations ≥ number of unknowns:</p>
+<div class="arithmatex">\[
+4n \geq 5+3n \quad\rightarrow\quad n\geq 5
+\]</div>
+</li>
+</ul>
+<h2 id="relative-motion-estimation">Relative Motion Estimation</h2>
+<p>Can we solve the estimation of relative motion <span class="arithmatex">\((R, T)\)</span> independently of the estimation of the 3D points? Yes! This section proves that this is possible.</p>
+<h3 id="the-epipolar-constraint-recap">The Epipolar Constraint (Recap)</h3>
+<ul>
+<li>The camera centers <span class="arithmatex">\(C_1\)</span>, <span class="arithmatex">\(C_2\)</span> and one image point <span class="arithmatex">\(p_1\)</span> (or <span class="arithmatex">\(p_2\)</span>) determine the so called <strong>epipolar plane</strong>.</li>
+<li>The intersections of the epipolar plane with the two image planes are called <strong>epipolar lines</strong>.</li>
+<li><strong>Corresponding points must therefore lie along the epipolar lines</strong>: This constraint is called the epipolar constraint</li>
+<li>And alternative way to formulate the epipolar constraint is to notice that <strong>two corresponding image vectors plus the baseline must be coplanar</strong>.</li>
+</ul>
+<p><img alt="p517" src="../../img/p517w.svg#only-light" />
+<img alt="p517" src="../../img/p517b.svg#only-dark" /></p>
+<p><img alt="p518" src="../../img/p518w.svg#only-light" />
+<img alt="p518" src="../../img/p518b.svg#only-dark" /></p>
+<p>We know that <span class="arithmatex">\(\bar{p}_1\)</span>, <span class="arithmatex">\(\bar{p}_2\)</span> and <span class="arithmatex">\(T\)</span> are <strong>coplanar</strong> :</p>
+<div class="arithmatex">\[
+\bar{p}_2^T \cdot n = 0 \rightarrow
+\bar{p}_2^T \cdot (T \times \bar{p}'_1) = 0 \rightarrow
+\bar{p}_2^T(T \times (R\bar{p}_1)) = 0 \rightarrow
+\bar{p}_2^T [T_\times R] \bar{p}_1 = 0
+\]</div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p><span class="arithmatex">\(\bar{p}'_1\)</span> is the vector <span class="arithmatex">\(\bar{p}_1\)</span> in the second camera's frame.</p>
+</div>
+<p>The resulting equation from the deduction above is the <strong>epipolar constraint</strong>:</p>
+<div class="arithmatex">\[
+\bar{p}_2^T E \bar{p}_1^T = 0
+\]</div>
+<p>The the matrix <span class="arithmatex">\(E\)</span> is known as the <strong>essential matrix</strong>:</p>
+<div class="arithmatex">\[
+E = [T_\times] R
+\]</div>
+<h2 id="how-to-compute-the-essential-matrix">How to compute the Essential matrix?</h2>
+<p>If we don't know <span class="arithmatex">\(R\)</span>, <span class="arithmatex">\(T\)</span>, can we estimate <span class="arithmatex">\(E\)</span> from two images?</p>
+<ul>
+<li>Yes, given at least 5 correspondences</li>
+</ul>
+<h2 id="the-8-point-algorithm">The 8-Point Algorithm</h2>
+<p>Each pair of correspondences <span class="arithmatex">\(\bar{p}_1 = (\bar{u}_1, \bar{v}_1, 1)^T\)</span>, <span class="arithmatex">\(\bar{p}_2 = (\bar{u}_2, \bar{v}_2, 1)^T\)</span> provides a linear equation:</p>
+<div class="arithmatex">\[
+\bar{p}_2^T E \bar{p}_1 = 0 \quad\text{with}\quad E = \begin{bmatrix}
+e_{11} &amp; e_{12} &amp; e_{13} \\
+e_{21} &amp; e_{22} &amp; e_{23} \\
+e_{31} &amp; e_{32} &amp; e_{33}
+\end{bmatrix}
+\]</div>
+<p>Leading to the equation:</p>
+<div class="arithmatex">\[
+\bar{u}_2 \bar{u}_1 e\_{11} + \bar{u}_2 \bar{v}_1 e\_{12} + \bar{u}_2 e\_{13} + \bar{v}_2 \bar{u}_1 e\_{21} + \bar{v}_2 \bar{v}_1 e\_{22} + \bar{v}_2 e\_{23} + \bar{u}_1 e\_{31} + \bar{v}_1 e\_{32} + e\_{33} = 0
+\]</div>
+<p>for each point in 3D space seen by the two cameras. For <span class="arithmatex">\(n\)</span> points, we can write <span class="arithmatex">\(QE = 0\)</span>, which expands to:</p>
+<div class="arithmatex">\[
+\begin{bmatrix}
+\bar{u}_2^1 \bar{u}_1^1 &amp; \bar{u}_2^1 \bar{v}_1^1 &amp; \bar{u}_2^1 &amp; \bar{v}_2^1 \bar{u}_1^1 &amp; \bar{v}_2^1 \bar{v}_1^1 &amp; \bar{v}_2^1 &amp; \bar{u}_1^1 &amp; \bar{v}_1^1 &amp; 1 \\\\
+\bar{u}_2^2 \bar{u}_1^2 &amp; \bar{u}_2^2 \bar{v}_1^2 &amp; \bar{u}_2^2 &amp; \bar{v}_2^2 \bar{u}_1^2 &amp; \bar{v}_2^2 \bar{v}_1^2 &amp; \bar{v}_2^2 &amp; \bar{u}_1^2 &amp; \bar{v}_1^2 &amp; 1 \\\\
+\vdots &amp; \vdots &amp; \vdots &amp; \vdots &amp; \vdots &amp; \vdots &amp; \vdots &amp; \vdots &amp; \vdots \\\\
+\bar{u}_2^n \bar{u}_1^n &amp; \bar{u}_2^n \bar{v}_1^n &amp; \bar{u}_2^n &amp; \bar{v}_2^n \bar{u}_1^n &amp; \bar{v}_2^n \bar{v}_1^n &amp; \bar{v}_2^n &amp; \bar{u}_1^n &amp; \bar{v}_1^n &amp; 1
+\end{bmatrix}
+\begin{bmatrix}
+e_{11} \\
+e_{12} \\
+e_{13} \\
+e_{21} \\
+e_{22} \\
+e_{23} \\
+e_{31} \\
+e_{32} \\
+e_{33}
+\end{bmatrix} = 0
+\]</div>
+<p>The matrix <span class="arithmatex">\(Q\)</span> is known, whereas the matrix <span class="arithmatex">\(E\)</span> is unknown.</p>
+<h3 id="solving-the-8-point-algorithm">Solving the 8-Point Algorithm</h3>
+<p><strong>Minimal Solution</strong></p>
+<ul>
+<li><span class="arithmatex">\(Q_{n\times 9}\)</span> should have rank 8 to have a unique (up to scale) non-trivial solution <span class="arithmatex">\(\bar{E}\)</span></li>
+<li>Each point correspondence provides 1 independent equation</li>
+<li>Thus, 8 point correspondences are needed</li>
+</ul>
+<p><strong>Over-Determined Solution</strong></p>
+<ul>
+<li><span class="arithmatex">\(n&gt;8\)</span> points</li>
+<li>A solution is to minimize <span class="arithmatex">\(\|Q\bar{E}\|^2\)</span> subject to the constraint <span class="arithmatex">\(\|\bar{E}\|^2 = 1\)</span>
+    The solution is the eigenvector corresponding to the smallest eigenvalue of the matrix <span class="arithmatex">\(Q^T Q\)</span> (because it is the unit vector <span class="arithmatex">\(x\)</span> that minimizes <span class="arithmatex">\(\|Qx\|^2 = x^T Q^T Q x\)</span>).</li>
+<li>It can be solved through singular value decomposition (SVD)</li>
+</ul>
+<p><strong>Degenerate Configurations</strong></p>
+<ul>
+<li>The solution of the 8-point algorithm is <strong>degenerate when the 3D points are coplanar</strong>.</li>
+<li>Conversely, the 5-point algorithm works also for coplanar points.</li>
+</ul>
+<h2 id="extract-rotation-and-translation">Extract Rotation and Translation</h2>
+<p>Singular value decomposition yields the following: <span class="arithmatex">\(E = U \Sigma V^T\)</span>.</p>
+<p>Enforcing a rank-2 constraint: We set the smallest singular value of <span class="arithmatex">\(\Sigma\)</span> to 0:</p>
+<div class="arithmatex">\[
+\Sigma = \begin{bmatrix}
+    \sigma_1 &amp; 0 &amp; 0 \\
+    0 &amp; \sigma_2 &amp; 0 \\
+    0 &amp; 0 &amp; \sigma_3
+    \end{bmatrix} = \begin{bmatrix}
+    \sigma_1 &amp; 0 &amp; 0 \\
+    0 &amp; \sigma_2 &amp; 0 \\
+    0 &amp; 0 &amp; 0
+    \end{bmatrix}
+\]</div>
+<div class="arithmatex">\[
+\hat{T} = U \begin{bmatrix}
+    0 &amp; \mp 1 &amp; 0 \\
+    \pm 1 &amp; 0 &amp; 0 \\
+    0 &amp; 0 &amp; 0
+    \end{bmatrix} \Sigma V^T \quad \text{where} \quad \hat{T} = \begin{bmatrix}
+    0 &amp; -t_z &amp; t_y \\
+    t_z &amp; 0 &amp; t_x \\
+    -t_y &amp; t_x &amp; 0
+    \end{bmatrix} \rightarrow \hat{t} = \begin{bmatrix} t_x \\ t_y \\ t_z \end{bmatrix}
+\]</div>
+<div class="arithmatex">\[
+\hat{R} = U \begin{bmatrix}
+    0 &amp; \mp 1 &amp; 0 \\
+    \pm 1 &amp; 0 &amp; 0 \\
+    0 &amp; 0 &amp; 0
+    \end{bmatrix} V^T
+\]</div>
+<p>Therefore <span class="arithmatex">\(R\)</span> and <span class="arithmatex">\(T\)</span> can be found as follows:</p>
+<div class="arithmatex">\[
+\begin{align}
+    T &amp;= K_2 \hat{t} \\
+    R &amp;= K_2 \hat{R} K_1^{-1}
+\end{align}
+\]</div>
+<p>Such an answer gives four possible solutions. However, there is only one solution where the points are in front of both cameras:</p>
+<p><img alt="p528" src="../../img/p528w.svg#only-light" />
+<img alt="p528" src="../../img/p528b.svg#only-dark" /></p>
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var tab,labels=set.querySelector(".tabbed-labels");for(tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": ["search.suggest", "content.tabs.link"], "search": "../../assets/javascripts/workers/search.208ed371.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.b4d07000.min.js"></script>
+      
+        <script src="../../javascripts/mathjax.js"></script>
+      
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>
